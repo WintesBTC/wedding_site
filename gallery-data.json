@@ -1,0 +1,24 @@
+{
+  "photos": [
+    {
+      "id": "1762110322065-qv2tgzcgn",
+      "url": "/guest_uploads/photos-1762110321953-181347304.jpg",
+      "originalName": "ceremonial-wedding-archway-chiavari-chairs-guests-outdoors.jpg",
+      "uploader": "x",
+      "description": "",
+      "uploadedAt": "2025-11-02T19:05:22.065Z"
+    },
+    {
+      "id": "1762110502981-riqvba5xo",
+      "url": "/guest_uploads/X1_test_001.jpg",
+      "originalName": "ceremonial-wedding-archway-chiavari-chairs-guests-outdoors.jpg",
+      "uploader": "X1",
+      "description": "test",
+      "uploadedAt": "2025-11-02T19:08:22.981Z"
+    }
+  ],
+  "stats": {
+    "total": 2,
+    "contributors": 2
+  }
+}

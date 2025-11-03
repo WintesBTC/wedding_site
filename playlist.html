@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hochzeitsplaylist - Mario & Maria</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="playlist.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="playlist-header">
+            <div class="back-button">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Zurück
+                </a>
+            </div>
+            <h1><i class="fas fa-music"></i> Hochzeitsplaylist</h1>
+            <p class="playlist-subtitle">Erweitere unsere Playlist mit deinen Lieblingssongs!</p>
+        </div>
+
+        <div class="playlist-content">
+            <!-- Song hinzufügen Formular -->
+            <div class="add-song-section">
+                <h2>Song hinzufügen</h2>
+                <form id="add-song-form" class="song-form">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="song-title">Songtitel *</label>
+                            <input type="text" id="song-title" name="title" required placeholder="z.B. Perfect - Ed Sheeran">
+                        </div>
+                        <div class="form-group">
+                            <label for="song-artist">Künstler *</label>
+                            <input type="text" id="song-artist" name="artist" required placeholder="z.B. Ed Sheeran">
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="song-genre">Genre</label>
+                            <select id="song-genre" name="genre">
+                                <option value="">Genre wählen</option>
+                                <option value="Pop">Pop</option>
+                                <option value="Rock">Rock</option>
+                                <option value="Hip-Hop">Hip-Hop</option>
+                                <option value="Electronic">Electronic</option>
+                                <option value="Jazz">Jazz</option>
+                                <option value="Classical">Klassik</option>
+                                <option value="Country">Country</option>
+                                <option value="R&B">R&B</option>
+                                <option value="Reggae">Reggae</option>
+                                <option value="Other">Andere</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="song-mood">Stimmung</label>
+                            <select id="song-mood" name="mood">
+                                <option value="">Stimmung wählen</option>
+                                <option value="Romantic">Romantisch</option>
+                                <option value="Party">Party</option>
+                                <option value="Dance">Tanzbar</option>
+                                <option value="Slow">Langsam</option>
+                                <option value="Upbeat">Beschwingt</option>
+                                <option value="Nostalgic">Nostalgisch</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="song-reason">Warum dieser Song? (optional)</label>
+                        <textarea id="song-reason" name="reason" rows="3" placeholder="Erzähle uns, warum dieser Song perfekt für unsere Hochzeit ist..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="submitter-name">Dein Name *</label>
+                        <input type="text" id="submitter-name" name="submitter" required placeholder="Dein Name">
+                    </div>
+
+                    <button type="submit" class="submit-btn">
+                        <i class="fas fa-plus"></i>
+                        Song hinzufügen
+                    </button>
+                </form>
+            </div>
+
+            <!-- Playlist Übersicht -->
+            <div class="playlist-section">
+                <div class="section-header">
+                    <h2>Unsere Playlist</h2>
+                    <div class="playlist-stats">
+                        <span id="total-songs">0 Songs</span>
+                        <span id="total-contributors">0 Beiträge</span>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="playlist-filters">
+                    <div class="filter-group">
+                        <label for="filter-genre">Genre filtern:</label>
+                        <select id="filter-genre">
+                            <option value="">Alle Genres</option>
+                            <option value="Pop">Pop</option>
+                            <option value="Rock">Rock</option>
+                            <option value="Hip-Hop">Hip-Hop</option>
+                            <option value="Electronic">Electronic</option>
+                            <option value="Jazz">Jazz</option>
+                            <option value="Classical">Klassik</option>
+                            <option value="Country">Country</option>
+                            <option value="R&B">R&B</option>
+                            <option value="Reggae">Reggae</option>
+                            <option value="Other">Andere</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="filter-mood">Stimmung filtern:</label>
+                        <select id="filter-mood">
+                            <option value="">Alle Stimmungen</option>
+                            <option value="Romantic">Romantisch</option>
+                            <option value="Party">Party</option>
+                            <option value="Dance">Tanzbar</option>
+                            <option value="Slow">Langsam</option>
+                            <option value="Upbeat">Beschwingt</option>
+                            <option value="Nostalgic">Nostalgisch</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search-songs">Suchen:</label>
+                        <input type="text" id="search-songs" placeholder="Song oder Künstler suchen...">
+                    </div>
+                </div>
+
+                <!-- Songs Liste -->
+                <div class="songs-list" id="songs-list">
+                    <!-- Songs werden hier dynamisch geladen -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="playlist.js"></script>
+</body>
+</html>
+

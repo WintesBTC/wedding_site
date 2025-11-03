@@ -1,0 +1,72 @@
+{
+  "siteTitle": "Hochzeit",
+  "background": {
+    "type": "image",
+    "value": "",
+    "image": "/admin_uploads/golden-wedding-rings-white-rose-from-wedding-bouquet.jpg",
+    "position": "cover"
+  },
+  "pageTitles": {
+    "index": "Hochzeit 1",
+    "rsvp": "RSVP - Mario & Sophie Hochzeit",
+    "gallery": "Foto-Galerie - Mario & Sophie Hochzeit",
+    "playlist": "Hochzeitsplaylist - Mario & Sophie",
+    "location": "Location - Mario & Sophie Hochzeit",
+    "admin": "Admin - Übersicht"
+  },
+  "profile": {
+    "name": "Mario & Sophie",
+    "bio": "Wir heiraten! 💕 15. Juni 2026",
+    "image": "/admin_uploads/hochzeit_demo.png"
+  },
+  "links": [
+    {
+      "title": "RSVP",
+      "subtitle": "Zusage oder Absage senden",
+      "url": "/rsvp",
+      "icon": "fas fa-heart",
+      "color": "linear-gradient(135deg, #ff6b9d 0%, #c44569 100%)",
+      "visible": true
+    },
+    {
+      "title": "Wunschliste",
+      "subtitle": "Unsere Geschenkewünsche",
+      "url": "https://example-wishlist.com",
+      "icon": "fas fa-gift",
+      "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "visible": true
+    },
+    {
+      "title": "Location",
+      "subtitle": "Adresse und Anfahrt",
+      "url": "/location",
+      "icon": "fas fa-map-marker-alt",
+      "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "visible": true
+    },
+    {
+      "title": "Programm",
+      "subtitle": "Ablauf der Feier",
+      "url": "/program",
+      "icon": "fas fa-calendar-alt",
+      "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      "visible": true
+    },
+    {
+      "title": "Hochzeitsplaylist",
+      "subtitle": "Erweitere unsere Playlist",
+      "url": "/playlist",
+      "icon": "fas fa-music",
+      "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+      "visible": true
+    },
+    {
+      "title": "Foto-Galerie",
+      "subtitle": "Teile deine Hochzeitsfotos",
+      "url": "/gallery",
+      "icon": "fas fa-camera",
+      "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "visible": true
+    }
+  ]
+}

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Übersicht</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="header-content">
+                <h1><i class="fas fa-tools"></i> Admin Panel</h1>
+                <div class="header-actions">
+                    <button id="refresh-btn" class="btn btn-primary">
+                        <i class="fas fa-sync-alt"></i> Aktualisieren
+                    </button>
+                    <a href="/" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> Zur Website
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="admin-content">
+            <!-- Statistiken -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="total-rsvps">0</h3>
+                        <p>Gesamt RSVPs</p>
+                    </div>
+                </div>
+
+                <div class="stat-card attending">
+                    <div class="stat-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="attending-count">0</h3>
+                        <p>Zusagen</p>
+                    </div>
+                </div>
+
+                <div class="stat-card not-attending">
+                    <div class="stat-icon">
+                        <i class="fas fa-times-circle"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="not-attending-count">0</h3>
+                        <p>Absagen</p>
+                    </div>
+                </div>
+
+                <div class="stat-card guests">
+                    <div class="stat-icon">
+                        <i class="fas fa-user-friends"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="total-guests">0</h3>
+                        <p>Gesamt Gäste</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter und Suche -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label for="status-filter">Status:</label>
+                    <select id="status-filter">
+                        <option value="all">Alle</option>
+                        <option value="yes">Zusagen</option>
+                        <option value="no">Absagen</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="search-input">Suche:</label>
+                    <input type="text" id="search-input" placeholder="Name oder E-Mail suchen...">
+                </div>
+
+                <div class="filter-group">
+                    <button id="export-btn" class="btn btn-success">
+                        <i class="fas fa-download"></i> Export CSV
+                    </button>
+                </div>
+            </div>
+
+            <!-- Seiteneinstellungen -->
+            <div class="rsvp-list-section" style="margin-bottom: 20px;">
+                <h2><i class="fas fa-cog"></i> Seiteneinstellungen</h2>
+                <div class="site-settings">
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="site-title">Allgemeiner Seitentitel (Fallback):</label>
+                        <input type="text" id="site-title" placeholder="z.B. Mario & Sophie Hochzeit" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px;">
+                        <small style="color: #64748b; display: block; margin-top: 5px;">Dieser Titel wird verwendet, falls kein spezifischer Titel gesetzt ist</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 10px; font-weight: 600;">Seitentitel für alle Seiten:</label>
+                        
+                        <div style="display: grid; gap: 12px;">
+                            <div>
+                                <label for="page-title-index" style="display: block; margin-bottom: 5px; font-size: 14px;">Hauptseite (index):</label>
+                                <input type="text" id="page-title-index" placeholder="Hochzeit 1" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-rsvp" style="display: block; margin-bottom: 5px; font-size: 14px;">RSVP Seite:</label>
+                                <input type="text" id="page-title-rsvp" placeholder="RSVP - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-gallery" style="display: block; margin-bottom: 5px; font-size: 14px;">Foto-Galerie:</label>
+                                <input type="text" id="page-title-gallery" placeholder="Foto-Galerie - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-playlist" style="display: block; margin-bottom: 5px; font-size: 14px;">Playlist Seite:</label>
+                                <input type="text" id="page-title-playlist" placeholder="Hochzeitsplaylist - Mario & Sophie" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-location" style="display: block; margin-bottom: 5px; font-size: 14px;">Location Seite:</label>
+                                <input type="text" id="page-title-location" placeholder="Location - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-admin" style="display: block; margin-bottom: 5px; font-size: 14px;">Admin Seite:</label>
+                                <input type="text" id="page-title-admin" placeholder="Admin - Übersicht" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                        </div>
+                        <small style="color: #64748b; display: block; margin-top: 10px;">Diese Titel erscheinen im Browser-Tab der jeweiligen Seite</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="profile-name">Profilname:</label>
+                        <input type="text" id="profile-name" placeholder="z.B. Mario & Sophie" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px;">
+                        <small style="color: #64748b; display: block; margin-top: 5px;">Dieser Name erscheint auf der Hauptseite</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="profile-bio">Profilbeschreibung:</label>
+                        <input type="text" id="profile-bio" placeholder="z.B. Wir heiraten! 💕 15. Juni 2026" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px;">
+                        <small style="color: #64748b; display: block; margin-top: 5px;">Beschreibung unter dem Namen</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="background-type">Hintergrund:</label>
+                        <select id="background-type" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px; margin-bottom: 10px;">
+                            <option value="gradient">Gradient (Farbverlauf)</option>
+                            <option value="color">Einfarbig</option>
+                            <option value="image">Bild</option>
+                        </select>
+                        
+                        <div id="background-gradient-option" style="margin-bottom: 10px;">
+                            <label for="background-gradient" style="display: block; margin-bottom: 5px; font-size: 14px;">Gradient CSS (z.B. linear-gradient(135deg, #667eea 0%, #764ba2 100%)):</label>
+                            <input type="text" id="background-gradient" placeholder="linear-gradient(135deg, #667eea 0%, #764ba2 100%)" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                        </div>
+                        
+                        <div id="background-color-option" style="margin-bottom: 10px; display: none;">
+                            <label for="background-color" style="display: block; margin-bottom: 5px; font-size: 14px;">Farbe (z.B. #667eea oder rgb(102, 126, 234)):</label>
+                            <input type="text" id="background-color" placeholder="#667eea" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                        </div>
+                        
+                        <div id="background-image-option" style="margin-bottom: 10px; display: none;">
+                            <label for="background-image" style="display: block; margin-bottom: 5px; font-size: 14px;">Bild URL (z.B. /uploads/hintergrund.jpg oder https://example.com/bild.jpg):</label>
+                            <input type="text" id="background-image" placeholder="/uploads/hintergrund.jpg" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            <div style="margin-top: 10px;">
+                                <label for="background-image-upload" class="btn btn-secondary" style="display: inline-block; cursor: pointer; margin-top: 8px;">
+                                    <i class="fas fa-upload"></i> Hintergrundbild hochladen
+                                </label>
+                                <input type="file" id="background-image-upload" accept="image/*" style="display: none;">
+                                <span id="background-image-status" style="margin-left: 10px; color: #64748b;"></span>
+                            </div>
+                            <div style="margin-top: 10px;">
+                                <label style="display: block; margin-bottom: 5px; font-size: 14px;">Bild-Position:</label>
+                                <select id="background-position" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                                    <option value="cover">Cover (füllt gesamten Bereich)</option>
+                                    <option value="contain">Contain (vollständig sichtbar)</option>
+                                    <option value="repeat">Wiederholen</option>
+                                </select>
+                            </div>
+                            <div id="background-image-preview" style="margin-top: 15px; display: none;">
+                                <img id="background-preview-img" src="" alt="Vorschau" style="width: 100%; max-width: 300px; border-radius: 8px; border: 2px solid #e2e8f0;">
+                            </div>
+                        </div>
+                        <small style="color: #64748b; display: block; margin-top: 10px;">Der Hintergrund wird auf allen Seiten angezeigt</small>
+                    </div>
+
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label for="profile-image">Profilbild (URL):</label>
+                        <input type="text" id="profile-image" placeholder="https://example.com/bild.jpg oder /uploads/bild.jpg" style="width: 100%; padding: 10px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 16px;">
+                        <small style="color: #64748b; display: block; margin-top: 5px;">URL zum Profilbild oder lokaler Pfad (z.B. /uploads/bild.jpg)</small>
+                        <div style="margin-top: 10px;">
+                            <label for="profile-image-upload" class="btn btn-secondary" style="display: inline-block; cursor: pointer; margin-top: 8px;">
+                                <i class="fas fa-upload"></i> Bild hochladen
+                            </label>
+                            <input type="file" id="profile-image-upload" accept="image/*" style="display: none;">
+                            <span id="profile-image-status" style="margin-left: 10px; color: #64748b;"></span>
+                        </div>
+                        <div id="profile-image-preview" style="margin-top: 15px; display: none;">
+                            <img id="profile-preview-img" src="" alt="Vorschau" style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 2px solid #e2e8f0;">
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:16px; display:flex; gap:12px;">
+                    <button id="save-site-settings" class="btn btn-primary"><i class="fas fa-save"></i> Einstellungen speichern</button>
+                </div>
+            </div>
+
+            <!-- Links verwalten -->
+            <div class="rsvp-list-section" style="margin-bottom: 20px;">
+                <h2>Links verwalten</h2>
+                <div id="links-editor"></div>
+                <div style="margin-top:16px; display:flex; gap:12px;">
+                    <button id="save-links" class="btn btn-primary"><i class="fas fa-save"></i> Links speichern</button>
+                    <button id="reload-links" class="btn btn-secondary"><i class="fas fa-sync"></i> Neu laden</button>
+                </div>
+            </div>
+
+            <!-- RSVP Liste -->
+            <div class="rsvp-list-section">
+                <h2>RSVP Liste</h2>
+                <div class="rsvp-list" id="rsvp-list">
+                    <!-- RSVPs werden hier dynamisch geladen -->
+                </div>
+            </div>
+
+            <!-- Galerie verwalten -->
+            <div class="rsvp-list-section" style="margin-top:20px;">
+                <h2>Galerie verwalten</h2>
+                <div class="rsvp-list" id="gallery-admin-list"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RSVP Detail Modal -->
+    <div id="rsvp-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>RSVP Details</h2>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Details werden hier geladen -->
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html>

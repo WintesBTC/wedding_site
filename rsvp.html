@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP - Mario & Maria Hochzeit</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="rsvp.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="rsvp-header">
+            <div class="back-button">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Zurück
+                </a>
+            </div>
+            <h1>RSVP</h1>
+            <p class="rsvp-subtitle">Bitte geben Sie uns Bescheid, ob Sie kommen können</p>
+        </div>
+
+        <form id="rsvp-form" class="rsvp-form">
+            <div class="form-section">
+                <h2>Ihre Daten</h2>
+                
+                <div class="form-group">
+                    <label for="name">Name *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">E-Mail *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Telefon (optional)</label>
+                    <input type="tel" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="guests">Anzahl Personen *</label>
+                    <select id="guests" name="guests" required>
+                        <option value="">Bitte wählen</option>
+                        <option value="1">1 Person</option>
+                        <option value="2">2 Personen</option>
+                        <option value="3">3 Personen</option>
+                        <option value="4">4 Personen</option>
+                        <option value="5">5+ Personen</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Zusage</h2>
+                
+                <div class="rsvp-options">
+                    <label class="rsvp-option">
+                        <input type="radio" name="attendance" value="yes" required>
+                        <div class="option-content">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ja, ich komme gerne!</span>
+                        </div>
+                    </label>
+
+                    <label class="rsvp-option">
+                        <input type="radio" name="attendance" value="no" required>
+                        <div class="option-content">
+                            <i class="fas fa-times-circle"></i>
+                            <span>Leider kann ich nicht kommen</span>
+                        </div>
+                    </label>
+                </div>
+            </div>
+
+            <div class="form-section" id="dietary-section" style="display: none;">
+                <h2>Allergien & Diätwünsche</h2>
+                <div class="form-group">
+                    <label for="dietary">Bitte teilen Sie uns mit, falls Sie Allergien oder besondere Diätwünsche haben:</label>
+                    <textarea id="dietary" name="dietary" rows="3" placeholder="z.B. Vegetarisch, Vegan, Glutenfrei, Nussallergie..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Nachricht (optional)</h2>
+                <div class="form-group">
+                    <label for="message">Hinterlassen Sie uns eine Nachricht:</label>
+                    <textarea id="message" name="message" rows="4" placeholder="Herzliche Grüße und Glückwünsche..."></textarea>
+                </div>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="submit-btn">
+                    <i class="fas fa-paper-plane"></i>
+                    RSVP senden
+                </button>
+            </div>
+        </form>
+
+        <div id="success-message" class="success-message" style="display: none;">
+            <div class="success-content">
+                <i class="fas fa-check-circle"></i>
+                <h2>Vielen Dank!</h2>
+                <p>Ihre RSVP wurde erfolgreich gesendet.</p>
+                <a href="/" class="back-home-btn">Zurück zur Hauptseite</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="rsvp.js"></script>
+</body>
+</html>

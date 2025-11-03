@@ -1,0 +1,195 @@
+/* Location Page Styles */
+
+.location-header {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+}
+
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+.back-link:hover {
+    opacity: 0.8;
+}
+
+.location-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.location-header h1 i {
+    font-size: 24px;
+}
+
+.location-subtitle {
+    font-size: 16px;
+    opacity: 0.9;
+    font-weight: 300;
+    margin-top: 5px;
+}
+
+.location-content {
+    padding: 30px 20px;
+}
+
+.address-section,
+.map-section {
+    margin-bottom: 30px;
+}
+
+.address-section h2,
+.map-section h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.address-section h2 i,
+.map-section h2 i {
+    color: #4facfe;
+}
+
+.address-text {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #334155;
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #4facfe;
+}
+
+.map-container {
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    background: white;
+}
+
+.map-container iframe {
+    display: block;
+    width: 100%;
+    min-height: 300px;
+}
+
+.route-section {
+    margin-top: 30px;
+    text-align: center;
+}
+
+.route-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    transition: all 0.3s ease;
+}
+
+.route-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
+}
+
+.route-button i {
+    font-size: 20px;
+}
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+    .location-header {
+        padding: 25px 15px;
+    }
+
+    .back-button {
+        top: 15px;
+        left: 15px;
+    }
+
+    .location-header h1 {
+        font-size: 24px;
+        margin-top: 0;
+    }
+
+    .location-content {
+        padding: 20px 15px;
+    }
+
+    .address-section,
+    .map-section {
+        margin-bottom: 25px;
+    }
+
+    .map-container iframe {
+        min-height: 250px;
+    }
+
+    .route-button {
+        padding: 14px 28px;
+        font-size: 16px;
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* Desktop Optimierungen */
+@media (min-width: 1024px) {
+    .location-header {
+        padding: 40px 30px;
+    }
+
+    .location-header h1 {
+        font-size: 36px;
+    }
+
+    .location-content {
+        padding: 40px 30px;
+    }
+
+    .address-text {
+        font-size: 18px;
+        padding: 25px;
+    }
+
+    .map-container iframe {
+        min-height: 400px;
+    }
+
+    .route-button {
+        padding: 18px 40px;
+        font-size: 20px;
+    }
+}
+

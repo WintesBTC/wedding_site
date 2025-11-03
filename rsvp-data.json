@@ -1,0 +1,23 @@
+{
+  "rsvps": [
+    {
+      "id": "1761398319980",
+      "name": "Test",
+      "email": "mail@mail.test",
+      "phone": "",
+      "guests": "3",
+      "attendance": "yes",
+      "dietary": "Nix",
+      "message": "GLG",
+      "timestamp": "2025-10-25T13:18:39.592Z",
+      "ip": "213.225.38.205",
+      "submittedAt": "2025-10-25T13:18:39.980Z"
+    }
+  ],
+  "stats": {
+    "total": 1,
+    "attending": 1,
+    "notAttending": 0,
+    "totalGuests": 3
+  }
+}

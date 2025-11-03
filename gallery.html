@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foto-Galerie - Mario & Maria Hochzeit</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="gallery.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="gallery-header">
+            <div class="back-button">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Zurück
+                </a>
+            </div>
+            <h1><i class="fas fa-camera"></i> Foto-Galerie</h1>
+            <p class="gallery-subtitle">Teile deine schönsten Hochzeitsmomente mit uns!</p>
+        </div>
+
+        <div class="gallery-content">
+            <!-- Upload Bereich -->
+            <div class="upload-section">
+                <h2>Fotos hochladen</h2>
+                <div class="upload-area" id="upload-area">
+                    <div class="upload-content">
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <h3>Fotos hierher ziehen oder klicken</h3>
+                        <p>Unterstützte Formate: JPG, PNG, GIF (max. 10MB pro Foto)</p>
+                        <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+                        <button type="button" class="upload-btn" onclick="document.getElementById('file-input').click()">
+                            <i class="fas fa-plus"></i>
+                            Fotos auswählen
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Upload Formular -->
+                <form id="upload-form" class="upload-form" style="display: none;">
+                    <div class="form-group">
+                        <label for="uploader-name">Dein Name *</label>
+                        <input type="text" id="uploader-name" name="uploader" required placeholder="Dein Name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="photo-description">Beschreibung (optional)</label>
+                        <textarea id="photo-description" name="description" rows="3" placeholder="Erzähle uns etwas über das Foto..."></textarea>
+                    </div>
+                    
+                    <div class="selected-files" id="selected-files">
+                        <!-- Ausgewählte Dateien werden hier angezeigt -->
+                    </div>
+                    
+                    <div class="upload-actions">
+                        <button type="button" class="cancel-btn" id="cancel-upload">
+                            <i class="fas fa-times"></i>
+                            Abbrechen
+                        </button>
+                        <button type="submit" class="submit-upload-btn">
+                            <i class="fas fa-upload"></i>
+                            Fotos hochladen
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Galerie -->
+            <div class="gallery-section">
+                <div class="section-header">
+                    <h2>Unsere Hochzeitsfotos</h2>
+                    <div class="gallery-stats">
+                        <span id="total-photos">0 Fotos</span>
+                        <span id="total-contributors">0 Beiträge</span>
+                    </div>
+                </div>
+
+                <!-- Filter -->
+                <div class="gallery-filters">
+                    <div class="filter-group">
+                        <label for="filter-uploader">Uploader filtern:</label>
+                        <select id="filter-uploader">
+                            <option value="">Alle Uploader</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="search-photos">Suchen:</label>
+                        <input type="text" id="search-photos" placeholder="Beschreibung suchen...">
+                    </div>
+                    <div class="filter-group">
+                        <label for="sort-photos">Sortieren:</label>
+                        <select id="sort-photos">
+                            <option value="newest">Neueste zuerst</option>
+                            <option value="oldest">Älteste zuerst</option>
+                            <option value="uploader">Nach Uploader</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Fotos Grid -->
+                <div class="photos-grid" id="photos-grid">
+                    <!-- Fotos werden hier dynamisch geladen -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Foto Modal -->
+    <div id="photo-modal" class="photo-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Foto</h3>
+                <button class="modal-close">&times;</button>
+            </div>
+            <div class="modal-body">
+                <img id="modal-image" src="" alt="">
+                <div class="modal-info">
+                    <div class="photo-details">
+                        <div class="uploader-info">
+                            <i class="fas fa-user"></i>
+                            <span id="modal-uploader">Uploader</span>
+                        </div>
+                        <div class="upload-date">
+                            <i class="fas fa-clock"></i>
+                            <span id="modal-date">Datum</span>
+                        </div>
+                    </div>
+                    <div class="photo-description" id="modal-description"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="gallery.js"></script>
+</body>
+</html>
+
