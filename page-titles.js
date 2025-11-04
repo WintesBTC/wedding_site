@@ -12,6 +12,7 @@
         if (path.includes('/gallery')) return 'gallery';
         if (path.includes('/playlist')) return 'playlist';
         if (path.includes('/location')) return 'location';
+        if (path.includes('/pricing')) return 'pricing';
         if (path.includes('/admin')) return 'admin';
         return 'index'; // Fallback
     }

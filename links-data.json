@@ -12,12 +12,13 @@
     "gallery": "Foto-Galerie - Anna & Lukas Hochzeit",
     "playlist": "Hochzeitsplaylist - Anna & Lukas",
     "location": "Location - Anna & Lukas Hochzeit",
+    "pricing": "Preise - Event Service",
     "admin": "Admin - Übersicht"
   },
   "profile": {
     "name": "Anna & Lukas",
     "bio": "Wir heiraten! 💕 15. Juni 2026",
-    "image": "/admin_uploads/hochzeit_demo.png"
+    "image": "/admin_uploads/profilbild_wedding.jpg"
   },
   "links": [
     {
@@ -25,7 +26,7 @@
       "subtitle": "Zusage oder Absage senden",
       "url": "/rsvp",
       "icon": "fas fa-heart",
-      "color": "linear-gradient(135deg, #ff6b9d 0%, #c44569 100%)",
+      "color": "linear-gradient(135deg, #F3E6E9 0%, #C9A227 100%)",
       "visible": true
     },
     {
@@ -33,7 +34,7 @@
       "subtitle": "Unsere Geschenkewünsche",
       "url": "https://example-wishlist.com",
       "icon": "fas fa-gift",
-      "color": "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
+      "color": "linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%)",
       "visible": true
     },
     {
@@ -41,7 +42,7 @@
       "subtitle": "Adresse und Anfahrt",
       "url": "/location",
       "icon": "fas fa-map-marker-alt",
-      "color": "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
+      "color": "linear-gradient(135deg, #C9A227 0%, #F3E6E9 100%)",
       "visible": true
     },
     {
@@ -49,7 +50,7 @@
       "subtitle": "Ablauf der Feier",
       "url": "/program",
       "icon": "fas fa-calendar-alt",
-      "color": "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
+      "color": "linear-gradient(135deg, #A7A3A0 0%, #C9A227 100%)",
       "visible": true
     },
     {
@@ -57,7 +58,7 @@
       "subtitle": "Erweitere unsere Playlist",
       "url": "/playlist",
       "icon": "fas fa-music",
-      "color": "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
+      "color": "linear-gradient(135deg, #F3E6E9 0%, #A7A3A0 100%)",
       "visible": true
     },
     {
@@ -65,7 +66,15 @@
       "subtitle": "Teile deine Hochzeitsfotos",
       "url": "/gallery",
       "icon": "fas fa-camera",
-      "color": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
+      "color": "linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%)",
+      "visible": true
+    },
+    {
+      "title": "Preise - Dieser Link ist nur in DEMO sichtbar!",
+      "subtitle": "Unsere Service-Pakete & Preise",
+      "url": "/pricing",
+      "icon": "fas fa-euro-sign",
+      "color": "linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%)",
       "visible": true
     }
   ]

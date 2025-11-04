@@ -6,9 +6,15 @@
     <title>RSVP - Mario & Maria Hochzeit</title>
     <script src="page-titles.js"></script>
     <script src="background.js"></script>
+    <!-- 
+         FONT-KONFIGURATION:
+         Ändern Sie hier die Google Fonts URL, wenn Sie die Schriftart ändern möchten.
+         Passen Sie auch die --font-family-primary Variable in variables.css an.
+         Beispiel: family=Roboto → ändern Sie Inter zu Roboto
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="rsvp.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -21,12 +27,12 @@
                 </a>
             </div>
             <h1>RSVP</h1>
-            <p class="rsvp-subtitle">Bitte geben Sie uns Bescheid, ob Sie kommen können</p>
+            <p class="rsvp-subtitle">Bitte gib uns Bescheid, ob du kommen kannst</p>
         </div>
 
         <form id="rsvp-form" class="rsvp-form">
             <div class="form-section">
-                <h2>Ihre Daten</h2>
+                <h2>Deine Daten</h2>
                 
                 <div class="form-group">
                     <label for="name">Name *</label>
@@ -81,7 +87,7 @@
             <div class="form-section" id="dietary-section" style="display: none;">
                 <h2>Allergien & Diätwünsche</h2>
                 <div class="form-group">
-                    <label for="dietary">Bitte teilen Sie uns mit, falls Sie Allergien oder besondere Diätwünsche haben:</label>
+                    <label for="dietary">Bitte teil uns mit, falls du Allergien oder besondere Diätwünsche hast:</label>
                     <textarea id="dietary" name="dietary" rows="3" placeholder="z.B. Vegetarisch, Vegan, Glutenfrei, Nussallergie..."></textarea>
                 </div>
             </div>
@@ -89,7 +95,7 @@
             <div class="form-section">
                 <h2>Nachricht (optional)</h2>
                 <div class="form-group">
-                    <label for="message">Hinterlassen Sie uns eine Nachricht:</label>
+                    <label for="message">Hinterlasse uns eine Nachricht:</label>
                     <textarea id="message" name="message" rows="4" placeholder="Herzliche Grüße und Glückwünsche..."></textarea>
                 </div>
             </div>
@@ -106,7 +112,7 @@
             <div class="success-content">
                 <i class="fas fa-check-circle"></i>
                 <h2>Vielen Dank!</h2>
-                <p>Ihre RSVP wurde erfolgreich gesendet.</p>
+                <p>Deine RSVP wurde erfolgreich gesendet.</p>
                 <a href="/" class="back-home-btn">Zurück zur Hauptseite</a>
             </div>
         </div>

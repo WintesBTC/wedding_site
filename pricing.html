@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preise - Event Service</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <!-- 
+         FONT-KONFIGURATION:
+         Ändern Sie hier die Google Fonts URL, wenn Sie die Schriftart ändern möchten.
+         Passen Sie auch die --font-family-primary Variable in variables.css an.
+         Beispiel: family=Roboto → ändern Sie Inter zu Roboto
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="pricing.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="pricing-header">
+            <div class="back-button">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Zurück
+                </a>
+            </div>
+            <h1><i class="fas fa-euro-sign"></i> Preise</h1>
+            <p class="pricing-subtitle">Transparente Preisgestaltung für Ihr Event</p>
+        </div>
+
+        <div class="pricing-content">
+            <div class="intro-section">
+                <p>Wir bieten Ihnen maßgeschneiderte Services für Ihre Hochzeit. Wählen Sie zwischen einzelnen Modulen oder profitieren Sie von unserem Komplettpaket.</p>
+            </div>
+
+            <!-- Modul 1: Einladungen -->
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <div class="module-badge module-1">Paket 1</div>
+                    <h2><i class="fas fa-envelope"></i> Handgeschriebene Hochzeitseinladungen</h2>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Handschriftliche Beschriftung durch Roboter</li>
+                        <li><i class="fas fa-check"></i> Hochwertiges Kartenmaterial</li>
+                        <li><i class="fas fa-check"></i> Kuvert inklusive</li>
+                        <li><i class="fas fa-check"></i> Wachssiegel</li>
+                        <li><i class="fas fa-check"></i> Adressierung der Kuverts (optional)</li>
+                        <li><i class="fas fa-check"></i> Versendung per Post (optional)</li>
+                    </ul>
+                    <div class="pricing-info">
+                        <div class="price-section">
+                            <span class="price-label">ab</span>
+                            <span class="price-amount">349€</span>
+                        </div>
+                        <p class="price-note">Preis variiert nach Anzahl der Einladungen</p>
+                        <p class="price-details">Beispiel: 50 Einladungen inkl. Versand: 349€<br>100 Einladungen inkl. Versand: 599€</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modul 2: Event Service -->
+            <div class="pricing-card">
+                <div class="pricing-card-header">
+                    <div class="module-badge module-2">Paket 2</div>
+                    <h2><i class="fas fa-qrcode"></i> Event Service Landingpage</h2>
+                </div>
+                <div class="pricing-card-body">
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Individuelle Landingpage mit QR-Code</li>
+                        <li><i class="fas fa-check"></i> RSVP-Management (Zu- & Absage)</li>
+                        <li><i class="fas fa-check"></i> Gästelisten-Verwaltung</li>
+                        <li><i class="fas fa-check"></i> Informationen & Location (Google & Apple Maps)</li>
+                        <li><i class="fas fa-check"></i> Wunschliste (Amazon oder eigene)</li>
+                        <li><i class="fas fa-check"></i> Event-Playlist (eigene oder Gäste-Vorschläge)</li>
+                        <li><i class="fas fa-check"></i> Shared Gallery (Foto-Upload & Download für Gäste)</li>
+                        <li><i class="fas fa-check"></i> QR-Code-Druckvorlagen für Einladungen & Kärtchen</li>
+                    </ul>
+                    <div class="pricing-info">
+                        <div class="price-section">
+                            <span class="price-label">ab</span>
+                            <span class="price-amount">249€</span>
+                        </div>
+                        <p class="price-note">Einmalige Zahlung für Ihr Event</p>
+                        <p class="price-details">Inkl. Einrichtung, Hosting & Support</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Komplettpaket -->
+            <div class="pricing-card featured">
+                <div class="pricing-card-header">
+                    <div class="module-badge module-complete">Komplettpaket</div>
+                    <h2><i class="fas fa-star"></i> Modul 1 + Modul 2</h2>
+                </div>
+                <div class="pricing-card-body">
+                    <p class="bundle-description">Sparen Sie bis zu 100€ bei Buchung beider Module zusammen!</p>
+                    <ul class="features-list">
+                        <li><i class="fas fa-check"></i> Alle Features aus Modul 1</li>
+                        <li><i class="fas fa-check"></i> Alle Features aus Modul 2</li>
+                        <li><i class="fas fa-check"></i> QR-Code auf Einladungen integriert</li>
+                        <li><i class="fas fa-check"></i> Persönliche Beratung</li>
+                        <li><i class="fas fa-check"></i> Prioritätssupport</li>
+                    </ul>
+                    <div class="pricing-info">
+                        <div class="price-section">
+                            <span class="price-label">ab</span>
+                            <span class="price-amount">499€</span>
+                        </div>
+                        <p class="price-savings">Sie sparen bis zu 100€</p>
+                        <p class="price-details">Beispiel: 50 Einladungen + Event Service: 499€<br>100 Einladungen + Event Service: 749€</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kontakt -->
+            <div class="contact-section">
+                <h3><i class="fas fa-envelope"></i> Interesse geweckt?</h3>
+                <p>Kontaktieren Sie uns für ein individuelles Angebot!</p>
+                <a href="mailto:info@example.com" class="contact-button">
+                    <i class="fas fa-paper-plane"></i>
+                    Anfrage senden
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="pricing.js"></script>
+</body>
+</html>
+
+

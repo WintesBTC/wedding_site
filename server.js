@@ -1,3 +1,6 @@
+// Umgebungsvariablen aus .env Datei laden
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const fs = require('fs');
@@ -17,7 +20,7 @@ const LINKS_DB_FILE = 'links-data.json';
 
 // Simple Basic Auth for admin routes
 const ADMIN_USER = process.env.ADMIN_USER || 'admin';
-const ADMIN_PASS = process.env.ADMIN_PASS || 'admin';
+const ADMIN_PASS = process.env.ADMIN_PASS;
 
 function adminAuth(req, res, next) {
     try {
@@ -242,6 +245,11 @@ app.get('/gallery', (req, res) => {
 // Location Route
 app.get('/location', (req, res) => {
     res.sendFile(path.join(__dirname, 'location.html'));
+});
+
+// Pricing Route
+app.get('/pricing', (req, res) => {
+    res.sendFile(path.join(__dirname, 'pricing.html'));
 });
 
 // RSVP API - Neue RSVP speichern

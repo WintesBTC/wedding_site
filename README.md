@@ -36,14 +36,25 @@ wedding_site/
    npm install
    ```
 
-3. **Server starten**:
+3. **Umgebungsvariablen konfigurieren**:
+   - Kopieren Sie `.env.example` zu `.env`: `cp .env.example .env` (Linux/Mac) oder `copy .env.example .env` (Windows)
+   - Öffnen Sie `.env` und passen Sie die Werte an:
+     ```
+     ADMIN_USER=ihr_admin_benutzername
+     ADMIN_PASS=ihr_sicheres_passwort
+     PORT=3000
+     ```
+   - **WICHTIG**: Verwenden Sie niemals die Standard-Werte in Produktion!
+
+5. **Server starten**:
    ```bash
    npm start
    ```
 
-4. **Website öffnen**:
+6. **Website öffnen**:
    - Öffnen Sie Ihren Browser
    - Gehen Sie zu `http://localhost:3000`
+   - Admin-Panel: `http://localhost:3000/admin` (mit den Zugangsdaten aus .env)
 
 ### Option 2: Einfach HTML-Datei öffnen
 
@@ -51,6 +62,20 @@ wedding_site/
 2. **Hinweis**: Einige Features funktionieren möglicherweise nicht ohne Server
 
 ## ⚙️ Konfiguration
+
+### Umgebungsvariablen (.env)
+
+Die `.env` Datei enthält sensible Konfigurationswerte:
+
+- **ADMIN_USER**: Benutzername für das Admin-Panel
+- **ADMIN_PASS**: Passwort für das Admin-Panel
+- **PORT**: Server-Port (Standard: 3000)
+
+**Sicherheitshinweise:**
+- Die `.env` Datei ist bereits in `.gitignore` und wird nicht in Git committet
+- Verwenden Sie niemals schwache Passwörter
+- Teilen Sie die `.env` Datei niemals öffentlich
+- Für Produktion: Verwenden Sie starke, eindeutige Passwörter
 
 ### Ihre Links anpassen
 

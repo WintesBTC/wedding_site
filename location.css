@@ -1,8 +1,8 @@
 /* Location Page Styles */
 
 .location-header {
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    color: white;
+    background: linear-gradient(135deg, #F3E6E9 0%, #C9A227 100%);
+    color: #333;
     padding: 30px 20px;
     text-align: center;
     border-radius: 20px 20px 0 0;
@@ -15,7 +15,7 @@
 }
 
 .back-link {
-    color: white;
+    color: #333;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -72,17 +72,17 @@
 
 .address-section h2 i,
 .map-section h2 i {
-    color: #4facfe;
+    color: #C9A227;
 }
 
 .address-text {
     font-size: 16px;
     line-height: 1.8;
-    color: #334155;
-    background: #f8fafc;
+    color: #333;
+    background: #F7F5F2;
     padding: 20px;
     border-radius: 12px;
-    border-left: 4px solid #4facfe;
+    border-left: 4px solid #C9A227;
 }
 
 .map-container {
@@ -108,19 +108,19 @@
     align-items: center;
     gap: 12px;
     padding: 16px 32px;
-    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    background: linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%);
     color: white;
     text-decoration: none;
     border-radius: 12px;
     font-size: 18px;
     font-weight: 600;
-    box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.4);
     transition: all 0.3s ease;
 }
 
 .route-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(79, 172, 254, 0.5);
+    box-shadow: 0 6px 20px rgba(201, 162, 39, 0.5);
 }
 
 .route-button i {

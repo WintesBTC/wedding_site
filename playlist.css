@@ -3,8 +3,8 @@
 .playlist-header {
     text-align: center;
     padding: 40px 30px 30px;
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    color: white;
+    background: linear-gradient(135deg, #F3E6E9 0%, #C9A227 100%);
+    color: #333;
     position: relative;
 }
 
@@ -15,7 +15,7 @@
 }
 
 .back-link {
-    color: white;
+    color: #333;
     text-decoration: none;
     display: flex;
     align-items: center;
@@ -75,7 +75,7 @@
     content: '';
     width: 4px;
     height: 20px;
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%);
     border-radius: 2px;
 }
 
@@ -119,8 +119,8 @@
 .form-group select:focus,
 .form-group textarea:focus {
     outline: none;
-    border-color: #fa709a;
-    box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+    border-color: #C9A227;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
 }
 
 .form-group textarea {
@@ -129,7 +129,7 @@
 }
 
 .submit-btn {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    background: linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%);
     color: white;
     border: none;
     padding: 16px 32px;
@@ -142,13 +142,13 @@
     align-items: center;
     justify-content: center;
     gap: 10px;
-    box-shadow: 0 4px 15px rgba(250, 112, 154, 0.3);
+    box-shadow: 0 4px 15px rgba(201, 162, 39, 0.3);
     align-self: flex-start;
 }
 
 .submit-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(250, 112, 154, 0.4);
+    box-shadow: 0 8px 25px rgba(201, 162, 39, 0.4);
 }
 
 .submit-btn:disabled {
@@ -228,8 +228,8 @@
 .filter-group input:focus,
 .filter-group select:focus {
     outline: none;
-    border-color: #fa709a;
-    box-shadow: 0 0 0 3px rgba(250, 112, 154, 0.1);
+    border-color: #C9A227;
+    box-shadow: 0 0 0 3px rgba(201, 162, 39, 0.1);
 }
 
 .songs-list {
@@ -250,8 +250,8 @@
 }
 
 .song-item:hover {
-    border-color: #fa709a;
-    box-shadow: 0 4px 12px rgba(250, 112, 154, 0.1);
+    border-color: #C9A227;
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.1);
     transform: translateY(-1px);
 }
 

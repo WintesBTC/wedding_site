@@ -2,7 +2,7 @@
 
 .admin-container {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #F3E6E9 0%, #F7F5F2 100%);
     padding: 20px;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .btn-primary {
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%);
     color: white;
 }
 
@@ -241,7 +241,7 @@
     justify-content: center;
     font-size: 24px;
     color: white;
-    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+    background: linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%);
 }
 
 .stat-card.attending .stat-icon {
@@ -308,7 +308,7 @@
 .filter-group select:focus,
 .filter-group input:focus {
     outline: none;
-    border-color: #4f46e5;
+    border-color: #C9A227;
 }
 
 .rsvp-list-section {
@@ -345,8 +345,8 @@
 }
 
 .rsvp-item:hover {
-    border-color: #4f46e5;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.1);
+    border-color: #C9A227;
+    box-shadow: 0 4px 12px rgba(201, 162, 39, 0.1);
     transform: translateY(-1px);
 }
 
@@ -478,10 +478,10 @@
 }
 
 .detail-value.dietary {
-    background: #f8fafc;
+    background: #F7F5F2;
     padding: 12px;
     border-radius: 8px;
-    border-left: 4px solid #4f46e5;
+    border-left: 4px solid #C9A227;
 }
 
 .detail-value.message {
@@ -620,8 +620,8 @@
 .spinner {
     width: 40px;
     height: 40px;
-    border: 4px solid #f3f4f6;
-    border-top: 4px solid #4f46e5;
+    border: 4px solid #F7F5F2;
+    border-top: 4px solid #C9A227;
     border-radius: 50%;
     animation: spin 1s linear infinite;
 }
