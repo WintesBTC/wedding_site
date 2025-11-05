@@ -14,6 +14,7 @@ function initializeAdmin() {
     console.log('Admin Panel geladen');
     loadSiteSettings();
     loadLinksEditor();
+    loadWishlistAdmin();
     loadGalleryAdmin();
 }
 
@@ -23,7 +24,7 @@ async function loadRSVPData() {
         
         const response = await fetch('/api/rsvp/all');
         if (!response.ok) {
-            throw new Error('Fehler beim Laden der RSVP-Daten');
+            throw new Error('Fehler beim Laden der Rückmeldung-Daten');
         }
         
         const data = await response.json();
@@ -35,7 +36,7 @@ async function loadRSVPData() {
         
     } catch (error) {
         console.error('Fehler beim Laden der Daten:', error);
-        showError('Fehler beim Laden der RSVP-Daten');
+        showError('Fehler beim Laden der Rückmeldung-Daten');
     } finally {
         hideLoading();
     }
@@ -113,6 +114,9 @@ function setupEventListeners() {
     document.getElementById('save-links').addEventListener('click', saveLinks);
     document.getElementById('reload-links').addEventListener('click', loadLinksEditor);
     
+    // Wishlist Buttons
+    document.getElementById('add-wishlist-item').addEventListener('click', addWishlistItem);
+    
     // Modal
     const modal = document.getElementById('rsvp-modal');
     const modalClose = document.querySelector('.modal-close');
@@ -147,7 +151,7 @@ async function loadSiteSettings() {
         
         // Seitentitel für alle Seiten setzen
         const pageTitles = data.pageTitles || {};
-        const pageTitleFields = ['index', 'rsvp', 'gallery', 'playlist', 'location', 'admin'];
+        const pageTitleFields = ['index', 'rsvp', 'gallery', 'playlist', 'location', 'program', 'wishlist', 'admin'];
         pageTitleFields.forEach(pageName => {
             const input = document.getElementById(`page-title-${pageName}`);
             if (input) {
@@ -339,7 +343,7 @@ async function saveSiteSettings() {
         
         // Seitentitel für alle Seiten sammeln
         const pageTitles = {};
-        const pageTitleFields = ['index', 'rsvp', 'gallery', 'playlist', 'location', 'admin'];
+        const pageTitleFields = ['index', 'rsvp', 'gallery', 'playlist', 'location', 'program', 'wishlist', 'admin'];
         pageTitleFields.forEach(pageName => {
             const input = document.getElementById(`page-title-${pageName}`);
             if (input && input.value.trim()) {
@@ -495,6 +499,149 @@ async function saveLinks() {
     }
 }
 
+// Wishlist Administration
+async function loadWishlistAdmin() {
+    try {
+        const res = await fetch('/api/wishlist/all');
+        if (!res.ok) throw new Error('Fehler beim Laden der Wunschliste');
+        const data = await res.json();
+        const list = document.getElementById('wishlist-admin-list');
+        const items = data.items || [];
+        
+        if (items.length === 0) {
+            list.innerHTML = '<div class="empty-state"><i class="fas fa-gift"></i><h3>Keine Items</h3><p>Klicken Sie auf "Neues Item hinzufügen" um zu beginnen.</p></div>';
+            return;
+        }
+        
+        list.innerHTML = items.map(item => `
+            <div class="rsvp-item" style="gap:12px; align-items: flex-start;">
+                <div class="rsvp-info" style="flex: 1;">
+                    <div class="rsvp-name" style="display: flex; align-items: center; gap: 8px;">
+                        ${item.visible !== false ? '<i class="fas fa-eye" style="color: #10b981;"></i>' : '<i class="fas fa-eye-slash" style="color: #ef4444;"></i>'}
+                        <input type="text" data-id="${item.id}" data-field="title" value="${escapeHtml(item.title)}" style="flex: 1; padding: 6px 8px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 15px; font-weight: 600;">
+                    </div>
+                    <div class="rsvp-details" style="margin-top: 8px; flex-direction: column; gap: 8px;">
+                        <textarea data-id="${item.id}" data-field="description" placeholder="Beschreibung" style="width: 100%; padding: 6px 8px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px; min-height: 50px; resize: vertical;">${escapeHtml(item.description || '')}</textarea>
+                        <input type="text" data-id="${item.id}" data-field="link" value="${escapeHtml(item.link || '')}" placeholder="Link (z.B. Amazon URL)" style="width: 100%; padding: 6px 8px; border: 2px solid #e2e8f0; border-radius: 6px; font-size: 14px;">
+                    </div>
+                    <div style="margin-top: 8px; display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                        <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;">
+                            <input type="checkbox" data-id="${item.id}" data-field="purchased" ${item.purchased ? 'checked' : ''} onchange="updateWishlistItem('${item.id}', 'purchased', this.checked)">
+                            Bereits besorgt
+                        </label>
+                        <label style="display: flex; align-items: center; gap: 6px; font-size: 14px; cursor: pointer;">
+                            <input type="checkbox" data-id="${item.id}" data-field="visible" ${item.visible !== false ? 'checked' : ''} onchange="updateWishlistItem('${item.id}', 'visible', this.checked)">
+                            Sichtbar für Gäste
+                        </label>
+                    </div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    <button class="btn btn-primary" onclick="saveWishlistItem('${item.id}')" style="white-space: nowrap;">
+                        <i class="fas fa-save"></i> Speichern
+                    </button>
+                    <button class="btn btn-secondary" onclick="deleteWishlistItem('${item.id}')" style="white-space: nowrap;">
+                        <i class="fas fa-trash"></i> Löschen
+                    </button>
+                </div>
+            </div>
+        `).join('');
+    } catch (e) {
+        document.getElementById('wishlist-admin-list').innerHTML = '<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>Fehler beim Laden</h3></div>';
+    }
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+}
+
+async function saveWishlistItem(id) {
+    try {
+        const inputs = document.querySelectorAll(`[data-id="${id}"]`);
+        const updates = {};
+        
+        inputs.forEach(input => {
+            const field = input.getAttribute('data-field');
+            if (field === 'purchased' || field === 'visible') {
+                updates[field] = input.checked;
+            } else {
+                updates[field] = input.value;
+            }
+        });
+        
+        const res = await fetch(`/api/wishlist/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(updates)
+        });
+        
+        if (!res.ok) throw new Error('Fehler beim Speichern');
+        
+        loadWishlistAdmin();
+        alert('Item gespeichert!');
+    } catch (e) {
+        alert('Fehler: ' + e.message);
+    }
+}
+
+async function updateWishlistItem(id, field, value) {
+    try {
+        const res = await fetch(`/api/wishlist/${id}`, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ [field]: value })
+        });
+        
+        if (!res.ok) throw new Error('Fehler beim Aktualisieren');
+        
+        loadWishlistAdmin();
+    } catch (e) {
+        console.error('Fehler beim Aktualisieren:', e);
+        alert('Fehler beim Aktualisieren');
+    }
+}
+
+async function deleteWishlistItem(id) {
+    if (!confirm('Item wirklich löschen?')) return;
+    
+    try {
+        const res = await fetch(`/api/wishlist/${id}`, { method: 'DELETE' });
+        if (!res.ok) throw new Error('Fehler beim Löschen');
+        
+        loadWishlistAdmin();
+    } catch (e) {
+        alert('Fehler: ' + e.message);
+    }
+}
+
+async function addWishlistItem() {
+    const title = prompt('Titel des neuen Items:');
+    if (!title) return;
+    
+    try {
+        const res = await fetch('/api/wishlist', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                title: title,
+                description: '',
+                link: '',
+                purchased: false,
+                visible: true
+            })
+        });
+        
+        if (!res.ok) throw new Error('Fehler beim Hinzufügen');
+        
+        loadWishlistAdmin();
+        alert('Item hinzugefügt!');
+    } catch (e) {
+        alert('Fehler: ' + e.message);
+    }
+}
+
 // Galerie Administration (Löschen)
 async function loadGalleryAdmin() {
     try {
@@ -562,8 +709,8 @@ function renderRSVPList() {
         rsvpList.innerHTML = `
             <div class="empty-state">
                 <i class="fas fa-inbox"></i>
-                <h3>Keine RSVPs gefunden</h3>
-                <p>Es wurden keine RSVPs gefunden, die den Filterkriterien entsprechen.</p>
+                <h3>Keine Rückmeldungen gefunden</h3>
+                <p>Es wurden keine Rückmeldungen gefunden, die den Filterkriterien entsprechen.</p>
             </div>
         `;
         return;

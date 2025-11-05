@@ -1,0 +1,57 @@
+{
+  "items": [
+    {
+      "id": "1",
+      "title": "Küchenmaschine",
+      "description": "Eine moderne Küchenmaschine für unsere gemeinsame Küche",
+      "link": "https://www.amazon.de/s?k=küchenmaschine",
+      "purchased": false,
+      "visible": true
+    },
+    {
+      "id": "2",
+      "title": "Geschirrset für 12 Personen",
+      "description": "Elegantes weißes Porzellan-Geschirrset",
+      "link": "https://www.amazon.de/s?k=geschirrset+hochzeit",
+      "purchased": false,
+      "visible": true
+    },
+    {
+      "id": "3",
+      "title": "Bettwäsche-Set",
+      "description": "Hochwertige Baumwoll-Bettwäsche für unser neues Zuhause",
+      "link": "",
+      "purchased": true,
+      "visible": true
+    },
+    {
+      "id": "4",
+      "title": "Kaffeemaschine",
+      "description": "Siebtrapparat-Kaffeemaschine für den perfekten Start in den Tag",
+      "link": "https://www.amazon.de/s?k=kaffeemaschine",
+      "purchased": false,
+      "visible": true
+    },
+    {
+      "id": "5",
+      "title": "Besteck-Set",
+      "description": "Edelstahl-Besteck für 12 Personen",
+      "link": "",
+      "purchased": false,
+      "visible": true
+    },
+    {
+      "id": "6",
+      "title": "Wasserkocher",
+      "description": "Elektrischer Wasserkocher mit Temperaturregelung",
+      "link": "",
+      "purchased": false,
+      "visible": true
+    }
+  ],
+  "stats": {
+    "total": 6,
+    "purchased": 1,
+    "available": 5
+  }
+}

@@ -1,4 +1,4 @@
-// RSVP JavaScript Funktionalität
+// Rückmeldung JavaScript Funktionalität
 
 document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('rsvp-form');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
             }
 
-            // RSVP an Server senden
+            // Rückmeldung an Server senden
             const response = await fetch('/api/rsvp', {
                 method: 'POST',
                 headers: {
@@ -56,19 +56,19 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (!response.ok) {
-                throw new Error('Fehler beim Senden der RSVP. Bitte versuchen Sie es erneut.');
+                throw new Error('Fehler beim Senden der Rückmeldung. Bitte versuchen Sie es erneut.');
             }
 
             // Erfolg anzeigen
             showSuccessMessage();
             
         } catch (error) {
-            console.error('RSVP Error:', error);
+            console.error('Rückmeldung Error:', error);
             alert(error.message);
             
             // Button zurücksetzen
             submitBtn.disabled = false;
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> RSVP senden';
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Rückmeldung geben';
         }
     });
 

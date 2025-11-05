@@ -42,7 +42,7 @@
                     </div>
                     <div class="stat-content">
                         <h3 id="total-rsvps">0</h3>
-                        <p>Gesamt RSVPs</p>
+                        <p>Gesamt Rückmeldungen</p>
                     </div>
                 </div>
 
@@ -120,8 +120,8 @@
                             </div>
                             
                             <div>
-                                <label for="page-title-rsvp" style="display: block; margin-bottom: 5px; font-size: 14px;">RSVP Seite:</label>
-                                <input type="text" id="page-title-rsvp" placeholder="RSVP - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                                <label for="page-title-rsvp" style="display: block; margin-bottom: 5px; font-size: 14px;">Rückmeldung Seite:</label>
+                                <input type="text" id="page-title-rsvp" placeholder="Rückmeldung geben - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
                             </div>
                             
                             <div>
@@ -137,6 +137,16 @@
                             <div>
                                 <label for="page-title-location" style="display: block; margin-bottom: 5px; font-size: 14px;">Location Seite:</label>
                                 <input type="text" id="page-title-location" placeholder="Location - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-program" style="display: block; margin-bottom: 5px; font-size: 14px;">Programm Seite:</label>
+                                <input type="text" id="page-title-program" placeholder="Programm - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
+                            </div>
+                            
+                            <div>
+                                <label for="page-title-wishlist" style="display: block; margin-bottom: 5px; font-size: 14px;">Wunschliste Seite:</label>
+                                <input type="text" id="page-title-wishlist" placeholder="Wunschliste - Mario & Sophie Hochzeit" style="width: 100%; padding: 8px; border: 2px solid #e2e8f0; border-radius: 8px; font-size: 14px;">
                             </div>
                             
                             <div>
@@ -233,11 +243,24 @@
                 </div>
             </div>
 
-            <!-- RSVP Liste -->
+            <!-- Rückmeldungen Liste -->
             <div class="rsvp-list-section">
-                <h2>RSVP Liste</h2>
+                <h2>Rückmeldungen Liste</h2>
                 <div class="rsvp-list" id="rsvp-list">
-                    <!-- RSVPs werden hier dynamisch geladen -->
+                    <!-- Rückmeldungen werden hier dynamisch geladen -->
+                </div>
+            </div>
+
+            <!-- Wunschliste verwalten -->
+            <div class="rsvp-list-section" style="margin-top:20px;">
+                <h2><i class="fas fa-gift"></i> Wunschliste verwalten</h2>
+                <div style="margin-bottom: 16px;">
+                    <button id="add-wishlist-item" class="btn btn-primary">
+                        <i class="fas fa-plus"></i> Neues Item hinzufügen
+                    </button>
+                </div>
+                <div class="rsvp-list" id="wishlist-admin-list">
+                    <!-- Wishlist Items werden hier geladen -->
                 </div>
             </div>
 
@@ -249,11 +272,11 @@
         </div>
     </div>
 
-    <!-- RSVP Detail Modal -->
+    <!-- Rückmeldung Detail Modal -->
     <div id="rsvp-modal" class="modal">
         <div class="modal-content">
             <div class="modal-header">
-                <h2>RSVP Details</h2>
+                <h2>Rückmeldung Details</h2>
                 <button class="modal-close">&times;</button>
             </div>
             <div class="modal-body" id="modal-body">

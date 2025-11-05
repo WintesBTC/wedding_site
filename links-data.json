@@ -8,10 +8,12 @@
   },
   "pageTitles": {
     "index": "Hochzeit Anna & Lukas",
-    "rsvp": "RSVP - Anna & Lukas Hochzeit",
+    "rsvp": "Rückmeldung geben - Anna & Lukas Hochzeit",
     "gallery": "Foto-Galerie - Anna & Lukas Hochzeit",
     "playlist": "Hochzeitsplaylist - Anna & Lukas",
     "location": "Location - Anna & Lukas Hochzeit",
+    "program": "Programm - Anna & Lukas Hochzeit",
+    "wishlist": "Wunschliste - Anna & Lukas Hochzeit",
     "pricing": "Preise - Event Service",
     "admin": "Admin - Übersicht"
   },
@@ -22,7 +24,7 @@
   },
   "links": [
     {
-      "title": "RSVP",
+      "title": "Rückmeldung geben",
       "subtitle": "Zusage oder Absage senden",
       "url": "/rsvp",
       "icon": "fas fa-heart",
@@ -32,7 +34,7 @@
     {
       "title": "Wunschliste",
       "subtitle": "Unsere Geschenkewünsche",
-      "url": "https://example-wishlist.com",
+      "url": "/wishlist",
       "icon": "fas fa-gift",
       "color": "linear-gradient(135deg, #C9A227 0%, #A7A3A0 100%)",
       "visible": true

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wunschliste - Mario & Maria Hochzeit</title>
+    <script src="page-titles.js"></script>
+    <script src="background.js"></script>
+    <!-- 
+         FONT-KONFIGURATION:
+         Ändern Sie hier die Google Fonts URL, wenn Sie die Schriftart ändern möchten.
+         Passen Sie auch die --font-family-primary Variable in variables.css an.
+         Beispiel: family=Roboto → ändern Sie Inter zu Roboto
+    -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="wishlist.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="wishlist-header">
+            <div class="back-button">
+                <a href="/" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Zurück
+                </a>
+            </div>
+            <h1><i class="fas fa-gift"></i> Wunschliste</h1>
+            <p class="wishlist-subtitle">Unsere Geschenkewünsche</p>
+        </div>
+
+        <div class="wishlist-content">
+            <div class="intro-text">
+                <p>Liebe Gäste, falls ihr uns eine Freude machen möchtet, findet ihr hier eine Auswahl unserer Wünsche. Natürlich freuen wir uns am meisten über eure Anwesenheit! 💕</p>
+            </div>
+
+            <div id="wishlist-items" class="wishlist-items">
+                <!-- Items werden hier dynamisch geladen -->
+                <div class="loading">
+                    <i class="fas fa-spinner fa-spin"></i>
+                    <p>Wunschliste wird geladen...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="wishlist.js"></script>
+</body>
+</html>
+

@@ -17,6 +17,7 @@ const UPLOADS_DIR = 'uploads';
 const ADMIN_UPLOADS_DIR = 'admin_uploads';
 const GUEST_UPLOADS_DIR = 'guest_uploads';
 const LINKS_DB_FILE = 'links-data.json';
+const WISHLIST_DB_FILE = 'wishlist-data.json';
 
 // Simple Basic Auth for admin routes
 const ADMIN_USER = process.env.ADMIN_USER || 'admin';
@@ -111,7 +112,7 @@ const adminUpload = multer({
 app.use(express.static(path.join(__dirname)));
 app.use(express.json());
 
-// RSVP-Datenbank initialisieren
+// Rückmeldung-Datenbank initialisieren
 function initRSVPDatabase() {
     if (!fs.existsSync(RSVP_DB_FILE)) {
         fs.writeFileSync(RSVP_DB_FILE, JSON.stringify({
@@ -126,24 +127,24 @@ function initRSVPDatabase() {
     }
 }
 
-// RSVP-Daten laden
+// Rückmeldung-Daten laden
 function loadRSVPData() {
     try {
         const data = fs.readFileSync(RSVP_DB_FILE, 'utf8');
         return JSON.parse(data);
     } catch (error) {
-        console.error('Fehler beim Laden der RSVP-Daten:', error);
+        console.error('Fehler beim Laden der Rückmeldung-Daten:', error);
         return { rsvps: [], stats: { total: 0, attending: 0, notAttending: 0, totalGuests: 0 } };
     }
 }
 
-// RSVP-Daten speichern
+// Rückmeldung-Daten speichern
 function saveRSVPData(data) {
     try {
         fs.writeFileSync(RSVP_DB_FILE, JSON.stringify(data, null, 2));
         return true;
     } catch (error) {
-        console.error('Fehler beim Speichern der RSVP-Daten:', error);
+        console.error('Fehler beim Speichern der Rückmeldung-Daten:', error);
         return false;
     }
 }
@@ -165,6 +166,7 @@ initRSVPDatabase();
 initPlaylistDatabase();
 initGalleryDatabase();
 initLinksDatabase();
+initWishlistDatabase();
 
 // Hauptroute - serviert die index.html
 app.get('/', (req, res) => {
@@ -222,7 +224,7 @@ app.patch('/api/links/:index', adminAuth, (req, res) => {
     res.status(500).json({ error: 'Fehler beim Speichern' });
 });
 
-// RSVP Route
+// Rückmeldung Route
 app.get('/rsvp', (req, res) => {
     res.sendFile(path.join(__dirname, 'rsvp.html'));
 });
@@ -247,12 +249,22 @@ app.get('/location', (req, res) => {
     res.sendFile(path.join(__dirname, 'location.html'));
 });
 
+// Programm Route
+app.get('/program', (req, res) => {
+    res.sendFile(path.join(__dirname, 'program.html'));
+});
+
+// Wishlist Route
+app.get('/wishlist', (req, res) => {
+    res.sendFile(path.join(__dirname, 'wishlist.html'));
+});
+
 // Pricing Route
 app.get('/pricing', (req, res) => {
     res.sendFile(path.join(__dirname, 'pricing.html'));
 });
 
-// RSVP API - Neue RSVP speichern
+// Rückmeldung API - Neue Rückmeldung speichern
 app.post('/api/rsvp', (req, res) => {
     try {
         const rsvpData = loadRSVPData();
@@ -266,25 +278,25 @@ app.post('/api/rsvp', (req, res) => {
         const updatedData = updateStats(rsvpData);
         
         if (saveRSVPData(updatedData)) {
-            console.log(`Neue RSVP von ${newRSVP.name}: ${newRSVP.attendance === 'yes' ? 'Zusage' : 'Absage'}`);
+            console.log(`Neue Rückmeldung von ${newRSVP.name}: ${newRSVP.attendance === 'yes' ? 'Zusage' : 'Absage'}`);
             res.json({ 
                 status: 'success', 
-                message: 'RSVP erfolgreich gespeichert',
+                message: 'Rückmeldung erfolgreich gespeichert',
                 stats: updatedData.stats
             });
         } else {
             throw new Error('Fehler beim Speichern');
         }
     } catch (error) {
-        console.error('RSVP Fehler:', error);
+        console.error('Rückmeldung Fehler:', error);
         res.status(500).json({ 
             status: 'error', 
-            message: 'Fehler beim Speichern der RSVP' 
+            message: 'Fehler beim Speichern der Rückmeldung' 
         });
     }
 });
 
-// RSVP Statistiken abrufen
+// Rückmeldung Statistiken abrufen
 app.get('/api/rsvp/stats', (req, res) => {
     try {
         const rsvpData = loadRSVPData();
@@ -295,14 +307,14 @@ app.get('/api/rsvp/stats', (req, res) => {
     }
 });
 
-// Alle RSVPs abrufen (Admin)
+// Alle Rückmeldungen abrufen (Admin)
 app.get('/api/rsvp/all', adminAuth, (req, res) => {
     try {
         const rsvpData = loadRSVPData();
         res.json(rsvpData);
     } catch (error) {
-        console.error('RSVP Daten Fehler:', error);
-        res.status(500).json({ error: 'Fehler beim Laden der RSVP-Daten' });
+        console.error('Rückmeldung Daten Fehler:', error);
+        res.status(500).json({ error: 'Fehler beim Laden der Rückmeldung-Daten' });
     }
 });
 
@@ -663,6 +675,218 @@ app.post('/api/profile/upload', adminAuth, adminUpload.single('photo'), (req, re
 app.use('/uploads', express.static(path.join(__dirname, UPLOADS_DIR)));
 app.use('/guest_uploads', express.static(path.join(__dirname, GUEST_UPLOADS_DIR)));
 app.use('/admin_uploads', express.static(path.join(__dirname, ADMIN_UPLOADS_DIR)));
+
+// Wishlist API
+
+function initWishlistDatabase() {
+    if (!fs.existsSync(WISHLIST_DB_FILE)) {
+        // Beispiel-Items
+        const exampleItems = [
+            {
+                id: '1',
+                title: 'Küchenmaschine',
+                description: 'Eine moderne Küchenmaschine für unsere gemeinsame Küche',
+                link: 'https://www.amazon.de/s?k=küchenmaschine',
+                purchased: false,
+                visible: true
+            },
+            {
+                id: '2',
+                title: 'Geschirrset für 12 Personen',
+                description: 'Elegantes weißes Porzellan-Geschirrset',
+                link: 'https://www.amazon.de/s?k=geschirrset+hochzeit',
+                purchased: false,
+                visible: true
+            },
+            {
+                id: '3',
+                title: 'Bettwäsche-Set',
+                description: 'Hochwertige Baumwoll-Bettwäsche für unser neues Zuhause',
+                link: '',
+                purchased: true,
+                visible: true
+            },
+            {
+                id: '4',
+                title: 'Kaffeemaschine',
+                description: 'Siebtrapparat-Kaffeemaschine für den perfekten Start in den Tag',
+                link: 'https://www.amazon.de/s?k=kaffeemaschine',
+                purchased: false,
+                visible: true
+            },
+            {
+                id: '5',
+                title: 'Besteck-Set',
+                description: 'Edelstahl-Besteck für 12 Personen',
+                link: '',
+                purchased: false,
+                visible: true
+            },
+            {
+                id: '6',
+                title: 'Wasserkocher',
+                description: 'Elektrischer Wasserkocher mit Temperaturregelung',
+                link: '',
+                purchased: false,
+                visible: true
+            }
+        ];
+        
+        fs.writeFileSync(WISHLIST_DB_FILE, JSON.stringify({
+            items: exampleItems,
+            stats: {
+                total: exampleItems.length,
+                purchased: exampleItems.filter(i => i.purchased).length,
+                available: exampleItems.filter(i => !i.purchased && i.visible !== false).length
+            }
+        }, null, 2));
+    }
+}
+
+function loadWishlistData() {
+    try {
+        const data = fs.readFileSync(WISHLIST_DB_FILE, 'utf8');
+        return JSON.parse(data);
+    } catch (error) {
+        console.error('Fehler beim Laden der Wishlist-Daten:', error);
+        return { items: [], stats: { total: 0, purchased: 0, available: 0 } };
+    }
+}
+
+function saveWishlistData(data) {
+    try {
+        // Statistiken aktualisieren
+        const stats = {
+            total: data.items.length,
+            purchased: data.items.filter(i => i.purchased).length,
+            available: data.items.filter(i => !i.purchased && i.visible !== false).length
+        };
+        data.stats = stats;
+        
+        fs.writeFileSync(WISHLIST_DB_FILE, JSON.stringify(data, null, 2));
+        return true;
+    } catch (error) {
+        console.error('Fehler beim Speichern der Wishlist-Daten:', error);
+        return false;
+    }
+}
+
+// Wishlist API Routes
+app.get('/api/wishlist', (req, res) => {
+    try {
+        const wishlistData = loadWishlistData();
+        res.json(wishlistData);
+    } catch (error) {
+        console.error('Wishlist API Fehler:', error);
+        res.status(500).json({ error: 'Fehler beim Laden der Wunschliste' });
+    }
+});
+
+// Alle Wishlist Items abrufen (Admin - inkl. unsichtbare)
+app.get('/api/wishlist/all', adminAuth, (req, res) => {
+    try {
+        const wishlistData = loadWishlistData();
+        res.json(wishlistData);
+    } catch (error) {
+        console.error('Wishlist Admin API Fehler:', error);
+        res.status(500).json({ error: 'Fehler beim Laden der Wunschliste' });
+    }
+});
+
+// Neues Item hinzufügen (Admin)
+app.post('/api/wishlist', adminAuth, (req, res) => {
+    try {
+        const wishlistData = loadWishlistData();
+        const newItem = {
+            id: Date.now().toString(),
+            title: req.body.title || '',
+            description: req.body.description || '',
+            link: req.body.link || '',
+            purchased: req.body.purchased === true,
+            visible: req.body.visible !== false
+        };
+        
+        wishlistData.items.push(newItem);
+        
+        if (saveWishlistData(wishlistData)) {
+            res.json({ 
+                status: 'success', 
+                message: 'Item erfolgreich hinzugefügt',
+                item: newItem
+            });
+        } else {
+            throw new Error('Fehler beim Speichern');
+        }
+    } catch (error) {
+        console.error('Wishlist Create Fehler:', error);
+        res.status(500).json({ 
+            status: 'error', 
+            message: 'Fehler beim Hinzufügen des Items' 
+        });
+    }
+});
+
+// Item aktualisieren (Admin)
+app.put('/api/wishlist/:id', adminAuth, (req, res) => {
+    try {
+        const wishlistData = loadWishlistData();
+        const id = req.params.id;
+        const index = wishlistData.items.findIndex(item => item.id === id);
+        
+        if (index === -1) {
+            return res.status(404).json({ error: 'Item nicht gefunden' });
+        }
+        
+        wishlistData.items[index] = {
+            ...wishlistData.items[index],
+            ...req.body,
+            id: wishlistData.items[index].id // ID darf nicht geändert werden
+        };
+        
+        if (saveWishlistData(wishlistData)) {
+            res.json({ 
+                status: 'success', 
+                message: 'Item erfolgreich aktualisiert',
+                item: wishlistData.items[index]
+            });
+        } else {
+            throw new Error('Fehler beim Speichern');
+        }
+    } catch (error) {
+        console.error('Wishlist Update Fehler:', error);
+        res.status(500).json({ 
+            status: 'error', 
+            message: 'Fehler beim Aktualisieren des Items' 
+        });
+    }
+});
+
+// Item löschen (Admin)
+app.delete('/api/wishlist/:id', adminAuth, (req, res) => {
+    try {
+        const wishlistData = loadWishlistData();
+        const id = req.params.id;
+        const index = wishlistData.items.findIndex(item => item.id === id);
+        
+        if (index === -1) {
+            return res.status(404).json({ error: 'Item nicht gefunden' });
+        }
+        
+        wishlistData.items.splice(index, 1);
+        
+        if (saveWishlistData(wishlistData)) {
+            res.json({ status: 'success', message: 'Item erfolgreich gelöscht' });
+        } else {
+            throw new Error('Fehler beim Speichern');
+        }
+    } catch (error) {
+        console.error('Wishlist Delete Fehler:', error);
+        res.status(500).json({ 
+            status: 'error', 
+            message: 'Fehler beim Löschen des Items' 
+        });
+    }
+});
 
 // Analytics Route (optional)
 app.post('/api/analytics', (req, res) => {

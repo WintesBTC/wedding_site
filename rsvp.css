@@ -1,4 +1,4 @@
-/* RSVP-spezifische Styles */
+/* Rückmeldung-spezifische Styles */
 
 .rsvp-header {
     text-align: center;
@@ -48,7 +48,7 @@
     margin: 0 auto;
 }
 
-/* Desktop Optimierungen für RSVP */
+/* Desktop Optimierungen für Rückmeldung */
 @media (min-width: 1024px) {
     .rsvp-form {
         max-width: 800px;
