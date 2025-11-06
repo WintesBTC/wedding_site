@@ -32,14 +32,16 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = Object.fromEntries(formData.entries());
             
             // Validierung
-            if (!data.name || !data.email || !data.attendance || !data.guests) {
+            if (!data.name || !data.attendance || !data.guests) {
                 throw new Error('Bitte füllen Sie alle Pflichtfelder aus.');
             }
 
-            // E-Mail Validierung
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(data.email)) {
-                throw new Error('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+            // E-Mail Validierung (nur wenn E-Mail angegeben wurde)
+            if (data.email && data.email.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.email)) {
+                    throw new Error('Bitte geben Sie eine gültige E-Mail-Adresse ein.');
+                }
             }
 
             // Rückmeldung an Server senden

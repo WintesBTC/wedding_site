@@ -7,10 +7,26 @@
       "uploader": "x",
       "description": "",
       "uploadedAt": "2025-11-02T19:05:22.065Z"
+    },
+    {
+      "id": "1762438297627-gj89eeu9a",
+      "url": "/guest_uploads/AS_as_001.jpg",
+      "originalName": "gallery3.jpg",
+      "uploader": "AS",
+      "description": "as",
+      "uploadedAt": "2025-11-06T14:11:37.627Z"
+    },
+    {
+      "id": "1762438317760-lth700mzf",
+      "url": "/guest_uploads/Julia_L._sd_001.jpg",
+      "originalName": "gallery4.jpg",
+      "uploader": "Julia L.",
+      "description": "sd",
+      "uploadedAt": "2025-11-06T14:11:57.760Z"
     }
   ],
   "stats": {
-    "total": 1,
-    "contributors": 1
+    "total": 3,
+    "contributors": 3
   }
 }

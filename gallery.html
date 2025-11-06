@@ -38,9 +38,9 @@
                     <div class="upload-content">
                         <i class="fas fa-cloud-upload-alt"></i>
                         <h3>Fotos hierher ziehen oder klicken</h3>
-                        <p>Unterstützte Formate: JPG, PNG, GIF (max. 10MB pro Foto)</p>
+                        <p>Unterstützte Formate: JPG, PNG, GIF (max. 20MB pro Foto)</p>
                         <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
-                        <button type="button" class="upload-btn" onclick="document.getElementById('file-input').click()">
+                        <button type="button" class="upload-btn">
                             <i class="fas fa-plus"></i>
                             Fotos auswählen
                         </button>
@@ -118,6 +118,9 @@
 
     <!-- Foto Modal -->
     <div id="photo-modal" class="photo-modal">
+        <button class="modal-nav-btn modal-nav-prev" id="modal-prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-title">Foto</h3>
@@ -140,6 +143,9 @@
                 </div>
             </div>
         </div>
+        <button class="modal-nav-btn modal-nav-next" id="modal-next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
     </div>
 
     <script src="gallery.js"></script>

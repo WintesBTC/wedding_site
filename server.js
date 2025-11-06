@@ -94,7 +94,7 @@ const imageFilter = function (req, file, cb) {
 const guestUpload = multer({ 
     storage: guestStorage,
     limits: {
-        fileSize: 10 * 1024 * 1024 // 10MB limit
+        fileSize: 20 * 1024 * 1024 // 20MB limit
     },
     fileFilter: imageFilter
 });
@@ -103,7 +103,7 @@ const guestUpload = multer({
 const adminUpload = multer({ 
     storage: adminStorage,
     limits: {
-        fileSize: 10 * 1024 * 1024 // 10MB limit
+        fileSize: 20 * 1024 * 1024 // 20MB limit
     },
     fileFilter: imageFilter
 });

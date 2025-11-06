@@ -3,6 +3,7 @@
 let allPhotos = [];
 let filteredPhotos = [];
 let selectedFiles = [];
+let currentPhotoIndex = -1;
 
 document.addEventListener('DOMContentLoaded', function() {
     initializeGallery();
@@ -84,6 +85,8 @@ function setupEventListeners() {
     // Modal
     const modal = document.getElementById('photo-modal');
     const modalClose = document.querySelector('.modal-close');
+    const modalPrev = document.getElementById('modal-prev');
+    const modalNext = document.getElementById('modal-next');
     
     modalClose.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
@@ -92,10 +95,31 @@ function setupEventListeners() {
         }
     });
     
-    // ESC zum Schließen
+    // Navigation-Buttons
+    if (modalPrev) {
+        modalPrev.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigatePhoto(-1);
+        });
+    }
+    if (modalNext) {
+        modalNext.addEventListener('click', (e) => {
+            e.stopPropagation();
+            navigatePhoto(1);
+        });
+    }
+    
+    // Tastatur-Navigation
     document.addEventListener('keydown', function(e) {
+        const modal = document.getElementById('photo-modal');
+        if (!modal || !modal.classList.contains('show')) return;
+        
         if (e.key === 'Escape') {
             closeModal();
+        } else if (e.key === 'ArrowLeft') {
+            navigatePhoto(-1);
+        } else if (e.key === 'ArrowRight') {
+            navigatePhoto(1);
         }
     });
 }
@@ -348,15 +372,52 @@ function renderPhotos() {
 }
 
 function showPhotoModal(photoId) {
-    const photo = allPhotos.find(p => p.id === photoId);
-    if (!photo) return;
+    // Finde den Index in den gefilterten Fotos
+    currentPhotoIndex = filteredPhotos.findIndex(p => p.id === photoId);
+    if (currentPhotoIndex === -1) return;
     
+    updateModalContent();
+    updateNavigationButtons();
+    document.getElementById('photo-modal').classList.add('show');
+}
+
+function updateModalContent() {
+    if (currentPhotoIndex < 0 || currentPhotoIndex >= filteredPhotos.length) return;
+    
+    const photo = filteredPhotos[currentPhotoIndex];
     document.getElementById('modal-image').src = photo.url;
     document.getElementById('modal-uploader').textContent = photo.uploader;
     document.getElementById('modal-date').textContent = formatDate(photo.uploadedAt);
     document.getElementById('modal-description').textContent = photo.description || 'Keine Beschreibung';
+}
+
+function navigatePhoto(direction) {
+    if (filteredPhotos.length === 0) return;
     
-    document.getElementById('photo-modal').classList.add('show');
+    currentPhotoIndex += direction;
+    
+    // Wraparound-Navigation
+    if (currentPhotoIndex < 0) {
+        currentPhotoIndex = filteredPhotos.length - 1;
+    } else if (currentPhotoIndex >= filteredPhotos.length) {
+        currentPhotoIndex = 0;
+    }
+    
+    updateModalContent();
+    updateNavigationButtons();
+}
+
+function updateNavigationButtons() {
+    const modalPrev = document.getElementById('modal-prev');
+    const modalNext = document.getElementById('modal-next');
+    
+    // Buttons immer anzeigen (auch bei nur einem Foto für bessere UX)
+    if (modalPrev) {
+        modalPrev.style.display = filteredPhotos.length > 1 ? 'flex' : 'none';
+    }
+    if (modalNext) {
+        modalNext.style.display = filteredPhotos.length > 1 ? 'flex' : 'none';
+    }
 }
 
 function closeModal() {
