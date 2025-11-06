@@ -106,6 +106,12 @@
                             <option value="uploader">Nach Uploader</option>
                         </select>
                     </div>
+                    <div class="filter-group">
+                        <button type="button" class="download-all-btn" id="download-all-btn">
+                            <i class="fas fa-download"></i>
+                            Alle Fotos herunterladen
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Fotos Grid -->
@@ -124,7 +130,12 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h3 id="modal-title">Foto</h3>
-                <button class="modal-close">&times;</button>
+                <div class="modal-header-actions">
+                    <button class="modal-download-btn" id="modal-download-btn" title="Foto herunterladen">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="modal-close">&times;</button>
+                </div>
             </div>
             <div class="modal-body">
                 <img id="modal-image" src="" alt="">
