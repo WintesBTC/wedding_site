@@ -23,10 +23,18 @@
       "uploader": "Julia L.",
       "description": "sd",
       "uploadedAt": "2025-11-06T14:11:57.760Z"
+    },
+    {
+      "id": "1762439407289-q6rcozrv0",
+      "url": "/guest_uploads/Sarah_Müller_so_süper_001.jpg",
+      "originalName": "gallery5.jpg",
+      "uploader": "Sarah Müller",
+      "description": "so süper",
+      "uploadedAt": "2025-11-06T14:30:07.289Z"
     }
   ],
   "stats": {
-    "total": 3,
-    "contributors": 3
+    "total": 4,
+    "contributors": 4
   }
 }
