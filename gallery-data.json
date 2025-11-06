@@ -1,32 +1,48 @@
 {
   "photos": [
     {
-      "id": "1762110322065-qv2tgzcgn",
-      "url": "/guest_uploads/photos-1762110321953-181347304.jpg",
-      "originalName": "ceremonial-wedding-archway-chiavari-chairs-guests-outdoors.jpg",
-      "uploader": "x",
-      "description": "",
-      "uploadedAt": "2025-11-02T19:05:22.065Z"
+      "id": "1762438986645-92bn954sq",
+      "url": "/guest_uploads/Sarah_Müller_Schönste_Braut_)_001.jpg",
+      "originalName": "gallery1.jpg",
+      "uploader": "Sarah Müller",
+      "description": "Schönste Braut :)",
+      "uploadedAt": "2025-11-06T14:23:06.645Z"
     },
     {
-      "id": "1762438297627-gj89eeu9a",
-      "url": "/guest_uploads/AS_as_001.jpg",
-      "originalName": "gallery3.jpg",
-      "uploader": "AS",
-      "description": "as",
-      "uploadedAt": "2025-11-06T14:11:37.627Z"
+      "id": "1762439004248-4r3ois91y",
+      "url": "/guest_uploads/Hermann_L._Super_Fotograf!!_001.jpg",
+      "originalName": "gallery2.jpg",
+      "uploader": "Hermann L.",
+      "description": "Super Fotograf!!",
+      "uploadedAt": "2025-11-06T14:23:24.248Z"
     },
     {
-      "id": "1762438317760-lth700mzf",
-      "url": "/guest_uploads/Julia_L._sd_001.jpg",
+      "id": "1762439037905-6pv7bqe1p",
+      "url": "/guest_uploads/Julia_A_Love_ittt_001.jpg",
       "originalName": "gallery4.jpg",
-      "uploader": "Julia L.",
-      "description": "sd",
-      "uploadedAt": "2025-11-06T14:11:57.760Z"
+      "uploader": "Julia A",
+      "description": "Love ittt",
+      "uploadedAt": "2025-11-06T14:23:57.905Z"
+    },
+    {
+      "id": "1762439037905-d5x0l15kg",
+      "url": "/guest_uploads/Julia_A_Love_ittt_002.jpg",
+      "originalName": "gallery3.jpg",
+      "uploader": "Julia A",
+      "description": "Love ittt",
+      "uploadedAt": "2025-11-06T14:23:57.905Z"
+    },
+    {
+      "id": "1762439072921-3h9e18jd4",
+      "url": "/guest_uploads/Sarah_Müller_001.jpg",
+      "originalName": "gallery5.jpg",
+      "uploader": "Sarah Müller",
+      "description": "",
+      "uploadedAt": "2025-11-06T14:24:32.921Z"
     }
   ],
   "stats": {
-    "total": 3,
+    "total": 5,
     "contributors": 3
   }
 }
