@@ -95,17 +95,29 @@ function setupEventListeners() {
         }
     });
     
-    // Navigation-Buttons
+    // Navigation-Buttons - robuster Event-Handler
     if (modalPrev) {
-        modalPrev.addEventListener('click', (e) => {
+        modalPrev.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             navigatePhoto(-1);
+            return false;
+        });
+        modalPrev.addEventListener('mousedown', function(e) {
+            e.stopPropagation();
         });
     }
     if (modalNext) {
-        modalNext.addEventListener('click', (e) => {
+        modalNext.addEventListener('click', function(e) {
+            e.preventDefault();
             e.stopPropagation();
+            e.stopImmediatePropagation();
             navigatePhoto(1);
+            return false;
+        });
+        modalNext.addEventListener('mousedown', function(e) {
+            e.stopPropagation();
         });
     }
     
@@ -378,7 +390,14 @@ function showPhotoModal(photoId) {
     
     updateModalContent();
     updateNavigationButtons();
-    document.getElementById('photo-modal').classList.add('show');
+    
+    const modal = document.getElementById('photo-modal');
+    modal.classList.add('show');
+    
+    // Sicherstellen, dass Buttons nach dem Öffnen sichtbar und klickbar sind
+    setTimeout(() => {
+        updateNavigationButtons();
+    }, 100);
 }
 
 function updateModalContent() {
@@ -413,10 +432,24 @@ function updateNavigationButtons() {
     
     // Buttons immer anzeigen (auch bei nur einem Foto für bessere UX)
     if (modalPrev) {
-        modalPrev.style.display = filteredPhotos.length > 1 ? 'flex' : 'none';
+        if (filteredPhotos.length > 1) {
+            modalPrev.style.display = 'flex';
+            modalPrev.style.visibility = 'visible';
+            modalPrev.style.opacity = '1';
+            modalPrev.style.pointerEvents = 'auto';
+        } else {
+            modalPrev.style.display = 'none';
+        }
     }
     if (modalNext) {
-        modalNext.style.display = filteredPhotos.length > 1 ? 'flex' : 'none';
+        if (filteredPhotos.length > 1) {
+            modalNext.style.display = 'flex';
+            modalNext.style.visibility = 'visible';
+            modalNext.style.opacity = '1';
+            modalNext.style.pointerEvents = 'auto';
+        } else {
+            modalNext.style.display = 'none';
+        }
     }
 }
 
