@@ -87,6 +87,19 @@ function setupEventListeners() {
     const modalClose = document.querySelector('.modal-close');
     const modalPrev = document.getElementById('modal-prev');
     const modalNext = document.getElementById('modal-next');
+    const modalDownloadBtn = document.getElementById('modal-download-btn');
+    const downloadAllBtn = document.getElementById('download-all-btn');
+    
+    if (modalDownloadBtn) {
+        modalDownloadBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            downloadSinglePhoto();
+        });
+    }
+    
+    if (downloadAllBtn) {
+        downloadAllBtn.addEventListener('click', downloadAllPhotos);
+    }
     
     modalClose.addEventListener('click', closeModal);
     modal.addEventListener('click', function(e) {
@@ -567,6 +580,135 @@ function showError(message) {
             <p>${message}</p>
         </div>
     `;
+}
+
+async function downloadSinglePhoto() {
+    if (currentPhotoIndex < 0 || currentPhotoIndex >= filteredPhotos.length) return;
+    
+    const photo = filteredPhotos[currentPhotoIndex];
+    const imageUrl = photo.url;
+    
+    try {
+        // Lade das Bild als Blob, um Cross-Origin-Probleme zu vermeiden
+        const response = await fetch(imageUrl);
+        const blob = await response.blob();
+        
+        // Erstelle einen temporären Link zum Download
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = photo.originalName || `photo-${photo.id}.jpg`;
+        
+        // Füge den Link zum DOM hinzu, klicke darauf und entferne ihn wieder
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Cleanup
+        URL.revokeObjectURL(link.href);
+        
+        showNotification('Foto wird heruntergeladen...', 'success');
+    } catch (error) {
+        console.error('Fehler beim Herunterladen des Fotos:', error);
+        showNotification('Fehler beim Herunterladen des Fotos', 'error');
+    }
+}
+
+async function downloadAllPhotos() {
+    if (filteredPhotos.length === 0) {
+        showNotification('Keine Fotos zum Herunterladen vorhanden.', 'warning');
+        return;
+    }
+    
+    const downloadAllBtn = document.getElementById('download-all-btn');
+    const originalText = downloadAllBtn.innerHTML;
+    
+    // Button deaktivieren und Loading-State anzeigen
+    downloadAllBtn.disabled = true;
+    downloadAllBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Wird vorbereitet...';
+    
+    try {
+        // Lade JSZip von CDN falls nicht vorhanden
+        if (typeof JSZip === 'undefined') {
+            await loadJSZip();
+        }
+        
+        const zip = new JSZip();
+        let loadedCount = 0;
+        const totalPhotos = filteredPhotos.length;
+        
+        // Lade alle Bilder und füge sie zum ZIP hinzu
+        for (const photo of filteredPhotos) {
+            try {
+                const response = await fetch(photo.url);
+                const blob = await response.blob();
+                const fileName = photo.originalName || `photo-${photo.id}.jpg`;
+                zip.file(fileName, blob);
+                loadedCount++;
+                
+                // Update Progress
+                downloadAllBtn.innerHTML = `<i class="fas fa-spinner fa-spin"></i> ${loadedCount}/${totalPhotos}...`;
+            } catch (error) {
+                console.error(`Fehler beim Laden von ${photo.url}:`, error);
+            }
+        }
+        
+        // Erstelle ZIP-Datei
+        downloadAllBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> ZIP wird erstellt...';
+        const zipBlob = await zip.generateAsync({ type: 'blob' });
+        
+        // Download ZIP-Datei
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(zipBlob);
+        link.download = `hochzeitsfotos-${new Date().toISOString().split('T')[0]}.zip`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        // Cleanup
+        URL.revokeObjectURL(link.href);
+        
+        showNotification(`${totalPhotos} Fotos wurden erfolgreich heruntergeladen!`, 'success');
+    } catch (error) {
+        console.error('Fehler beim Erstellen des ZIP-Archivs:', error);
+        
+        // Fallback: Einzelne Downloads
+        showNotification('ZIP-Erstellung fehlgeschlagen. Lade Fotos einzeln herunter...', 'warning');
+        downloadPhotosIndividually();
+    } finally {
+        // Button zurücksetzen
+        downloadAllBtn.disabled = false;
+        downloadAllBtn.innerHTML = originalText;
+    }
+}
+
+function downloadPhotosIndividually() {
+    // Fallback: Lade Fotos nacheinander herunter
+    filteredPhotos.forEach((photo, index) => {
+        setTimeout(() => {
+            const link = document.createElement('a');
+            link.href = photo.url;
+            link.download = photo.originalName || `photo-${photo.id}.jpg`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }, index * 300); // 300ms Verzögerung zwischen Downloads
+    });
+}
+
+function loadJSZip() {
+    return new Promise((resolve, reject) => {
+        if (typeof JSZip !== 'undefined') {
+            resolve();
+            return;
+        }
+        
+        const script = document.createElement('script');
+        script.src = 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js';
+        script.onload = resolve;
+        script.onerror = reject;
+        document.head.appendChild(script);
+    });
 }
 
 // CSS für Animationen hinzufügen
