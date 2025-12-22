@@ -1,7 +1,58 @@
 {
-  "songs": [],
+  "songs": [
+    {
+      "id": "1762458217656",
+      "title": "Perfect",
+      "artist": "Ed Sheeran",
+      "genre": "Pop",
+      "mood": "Romantic",
+      "reason": "Weil er einfach die moderne Hochzeitsballade ist.",
+      "submitter": "Janina",
+      "submittedAt": "2025-11-06T19:43:37.656Z"
+    },
+    {
+      "id": "1762458248180",
+      "title": "A Thousand Years",
+      "artist": "Christina Perri",
+      "genre": "Pop",
+      "mood": "Romantic",
+      "reason": "Zeitlos und voller Gefühl",
+      "submitter": "Laura K.",
+      "submittedAt": "2025-11-06T19:44:08.180Z"
+    },
+    {
+      "id": "1762458333801",
+      "title": "Can’t Help Falling in Love",
+      "artist": "Elvis Presley",
+      "genre": "Rock",
+      "mood": "Nostalgic",
+      "reason": "Ein Klassiker, der in jeder Generation funktioniert.",
+      "submitter": "Hermann T.",
+      "submittedAt": "2025-11-06T19:45:33.801Z"
+    },
+    {
+      "id": "1762458374948",
+      "title": "I Wanna Dance With Somebody",
+      "artist": "Whitney Houston",
+      "genre": "Pop",
+      "mood": "Dance",
+      "reason": "Wenn die Tanzfläche gefüllt werden soll, funktioniert dieser Song garantiert.",
+      "submitter": "Janina",
+      "submittedAt": "2025-11-06T19:46:14.948Z"
+    },
+    {
+      "id": "1762458422910",
+      "title": "All of Me",
+      "artist": "John Legend",
+      "genre": "R&B",
+      "mood": "Romantic",
+      "reason": "Der Text spricht aus, was viele fühlen.",
+      "submitter": "Lisa",
+      "submittedAt": "2025-11-06T19:47:02.910Z"
+    }
+  ],
   "stats": {
-    "total": 0,
-    "contributors": 0
+    "total": 5,
+    "contributors": 4
   }
 }
