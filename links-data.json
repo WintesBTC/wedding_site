@@ -14,13 +14,12 @@
     "location": "Location - Anna & Lukas Hochzeit",
     "program": "Programm - Anna & Lukas Hochzeit",
     "wishlist": "Wunschliste - Anna & Lukas Hochzeit",
-    "pricing": "Preise - Event Service",
     "admin": "Admin - Übersicht"
   },
   "profile": {
     "name": "Anna & Lukas",
     "bio": "Wir heiraten! 💕 15. Juni 2026",
-    "image": "/admin_uploads/profilbild_wedding.jpg"
+    "image": "/admin_uploads/profile_pic.jpg"
   },
   "links": [
     {
