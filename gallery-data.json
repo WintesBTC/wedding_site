@@ -1,0 +1,48 @@
+{
+  "photos": [
+    {
+      "id": "1767006103924-ezs65ibj3",
+      "url": "/guest_uploads/Sarah_Müller_001.webp",
+      "originalName": "gallery1.webp",
+      "uploader": "Sarah Müller",
+      "description": "",
+      "uploadedAt": "2025-12-29T11:01:43.924Z"
+    },
+    {
+      "id": "1767006103926-vv3emfczt",
+      "url": "/guest_uploads/Sarah_Müller_002.webp",
+      "originalName": "gallery2.webp",
+      "uploader": "Sarah Müller",
+      "description": "",
+      "uploadedAt": "2025-12-29T11:01:43.926Z"
+    },
+    {
+      "id": "1767006126536-290voht8v",
+      "url": "/guest_uploads/Hermann_K._Beste_Hochzeit!!_001.jpg",
+      "originalName": "gallery3.jpg",
+      "uploader": "Hermann K.",
+      "description": "Beste Hochzeit!!",
+      "uploadedAt": "2025-12-29T11:02:06.536Z"
+    },
+    {
+      "id": "1767006146851-w614vsl2y",
+      "url": "/guest_uploads/Jenny_Schönstes_Brautpaar!!!_001.webp",
+      "originalName": "gallery4.webp",
+      "uploader": "Jenny",
+      "description": "Schönstes Brautpaar!!!",
+      "uploadedAt": "2025-12-29T11:02:26.851Z"
+    },
+    {
+      "id": "1767006146852-fpzgudbde",
+      "url": "/guest_uploads/Jenny_Schönstes_Brautpaar!!!_002.webp",
+      "originalName": "gallery5.webp",
+      "uploader": "Jenny",
+      "description": "Schönstes Brautpaar!!!",
+      "uploadedAt": "2025-12-29T11:02:26.852Z"
+    }
+  ],
+  "stats": {
+    "total": 5,
+    "contributors": 3
+  }
+}
