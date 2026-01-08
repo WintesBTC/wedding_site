@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 throw new Error('Fehler beim Senden der Rückmeldung. Bitte versuchen Sie es erneut.');
             }
 
-            // Erfolg anzeigen
+            // DEMO MODUS: Erfolg anzeigen (Daten werden nicht gespeichert)
             showSuccessMessage();
             
         } catch (error) {

@@ -69,12 +69,28 @@ async function handleSongSubmit(e) {
             throw new Error('Fehler beim Hinzufügen des Songs');
         }
         
+        const result = await response.json();
+        
         // Erfolg
         showNotification('Song erfolgreich hinzugefügt!', 'success');
         form.reset();
         
-        // Playlist neu laden
-        await loadSongs();
+        // DEMO MODUS: Füge Song temporär zur Anzeige hinzu
+        // (Er wird nicht in der Datenbank gespeichert und verschwindet nach Reload)
+        if (result && result.stats) {
+            const newSong = {
+                id: Date.now().toString(),
+                ...songData,
+                submittedAt: new Date().toISOString()
+            };
+            allSongs.push(newSong);
+            filteredSongs = [...allSongs];
+            updateStats();
+            renderSongs();
+        } else {
+            // Fallback: Playlist neu laden
+            await loadSongs();
+        }
         
     } catch (error) {
         console.error('Song Submit Error:', error);

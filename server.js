@@ -264,7 +264,7 @@ app.get('/pricing', (req, res) => {
     res.sendFile(path.join(__dirname, 'pricing.html'));
 });
 
-// Rückmeldung API - Neue Rückmeldung speichern
+// Rückmeldung API - Neue Rückmeldung speichern - DEMO MODUS: Simuliert Erfolg, speichert aber nichts
 app.post('/api/rsvp', (req, res) => {
     try {
         const rsvpData = loadRSVPData();
@@ -274,19 +274,21 @@ app.post('/api/rsvp', (req, res) => {
             submittedAt: new Date().toISOString()
         };
         
-        rsvpData.rsvps.push(newRSVP);
-        const updatedData = updateStats(rsvpData);
+        // DEMO MODUS: Simuliere Statistiken ohne tatsächliche Speicherung
+        const currentStats = updateStats(rsvpData);
+        const demoStats = {
+            total: currentStats.stats.total + 1,
+            attending: newRSVP.attendance === 'yes' ? currentStats.stats.attending + 1 : currentStats.stats.attending,
+            notAttending: newRSVP.attendance === 'no' ? currentStats.stats.notAttending + 1 : currentStats.stats.notAttending,
+            totalGuests: currentStats.stats.totalGuests + parseInt(newRSVP.guests || 0)
+        };
         
-        if (saveRSVPData(updatedData)) {
-            console.log(`Neue Rückmeldung von ${newRSVP.name}: ${newRSVP.attendance === 'yes' ? 'Zusage' : 'Absage'}`);
-            res.json({ 
-                status: 'success', 
-                message: 'Rückmeldung erfolgreich gespeichert',
-                stats: updatedData.stats
-            });
-        } else {
-            throw new Error('Fehler beim Speichern');
-        }
+        console.log(`[DEMO] Rückmeldung von ${newRSVP.name} simuliert (nicht gespeichert): ${newRSVP.attendance === 'yes' ? 'Zusage' : 'Absage'}`);
+        res.json({ 
+            status: 'success', 
+            message: 'Rückmeldung erfolgreich gespeichert',
+            stats: demoStats
+        });
     } catch (error) {
         console.error('Rückmeldung Fehler:', error);
         res.status(500).json({ 
@@ -381,19 +383,19 @@ app.post('/api/playlist', (req, res) => {
             submittedAt: new Date().toISOString()
         };
         
-        playlistData.songs.push(newSong);
-        const updatedData = updatePlaylistStats(playlistData);
+        // DEMO MODUS: Simuliere Statistiken ohne tatsächliche Speicherung
+        const currentStats = updatePlaylistStats(playlistData);
+        const demoStats = {
+            total: currentStats.stats.total + 1,
+            contributors: new Set([...playlistData.songs.map(s => s.submitter), newSong.submitter]).size
+        };
         
-        if (savePlaylistData(updatedData)) {
-            console.log(`Neuer Song von ${newSong.submitter}: ${newSong.title} - ${newSong.artist}`);
-            res.json({ 
-                status: 'success', 
-                message: 'Song erfolgreich hinzugefügt',
-                stats: updatedData.stats
-            });
-        } else {
-            throw new Error('Fehler beim Speichern');
-        }
+        console.log(`[DEMO] Song von ${newSong.submitter} simuliert (nicht gespeichert): ${newSong.title} - ${newSong.artist}`);
+        res.json({ 
+            status: 'success', 
+            message: 'Song erfolgreich hinzugefügt',
+            stats: demoStats
+        });
     } catch (error) {
         console.error('Playlist Submit Fehler:', error);
         res.status(500).json({ 
@@ -468,7 +470,7 @@ app.get('/api/gallery', (req, res) => {
     }
 });
 
-// Gallery Upload (Gäste)
+// Gallery Upload (Gäste) - DEMO MODUS: Simuliert Erfolg, speichert aber nichts
 app.post('/api/gallery/upload', guestUpload.array('photos', 10), (req, res) => {
     try {
         const galleryData = loadGalleryData();
@@ -496,46 +498,51 @@ app.post('/api/gallery/upload', guestUpload.array('photos', 10), (req, res) => {
             });
         }
         
-        // Hilfsfunktion zum Sanitizen von Dateinamen
-        function sanitizeFilename(name) {
-            return name.replace(/[<>:"|?*\x00-\x1F]/g, '_').replace(/\s+/g, '_').replace(/_{2,}/g, '_');
-        }
+        // DEMO MODUS: Lösche temporäre Dateien sofort (keine Speicherung)
+        files.forEach(file => {
+            const tempPath = path.join(GUEST_UPLOADS_DIR, file.filename);
+            if (fs.existsSync(tempPath)) {
+                try { fs.unlinkSync(tempPath); } catch {}
+            }
+        });
         
-        const sanitizedUploader = sanitizeFilename(uploader);
-        const sanitizedDescription = description ? sanitizeFilename(description) : '';
-        const baseName = sanitizedDescription 
-            ? `${sanitizedUploader}_${sanitizedDescription}` 
-            : sanitizedUploader;
-        
-        // Dateien umbenennen: UploaderName_Beschreibung_001.jpg
+        // DEMO MODUS: Simuliere erfolgreiche Uploads ohne tatsächliche Speicherung
         const uploadedPhotos = files.map((file, index) => {
             const ext = path.extname(file.originalname);
-            const counter = String(index + 1).padStart(3, '0'); // 001, 002, 003, ...
-            const newFilename = `${baseName}_${counter}${ext}`;
-            const oldPath = path.join(GUEST_UPLOADS_DIR, file.filename);
+            const counter = String(index + 1).padStart(3, '0');
             
-            // Stelle sicher, dass der neue Dateiname eindeutig ist
-            let finalFilename = newFilename;
-            let counter_adjust = 0;
-            while (fs.existsSync(path.join(GUEST_UPLOADS_DIR, finalFilename))) {
-                counter_adjust++;
-                const adjustedCounter = String(index + 1 + counter_adjust * files.length).padStart(3, '0');
-                finalFilename = `${baseName}_${adjustedCounter}${ext}`;
-            }
-            const finalPath = path.join(GUEST_UPLOADS_DIR, finalFilename);
+            // Verwende ein Demo-Bild aus den vorhandenen Uploads als Platzhalter
+            const existingPhotos = galleryData.photos.filter(p => p.url && p.url.startsWith('/guest_uploads/'));
+            let demoPhotoUrl;
             
-            // Datei umbenennen
-            try {
-                fs.renameSync(oldPath, finalPath);
-            } catch (renameError) {
-                console.error('Fehler beim Umbenennen:', renameError);
-                // Falls Umbenennen fehlschlägt, verwende den temporären Namen
-                finalFilename = file.filename;
+            if (existingPhotos.length > 0) {
+                // Verwende zufälliges vorhandenes Demo-Bild
+                demoPhotoUrl = existingPhotos[Math.floor(Math.random() * existingPhotos.length)].url;
+            } else {
+                // Fallback: Versuche ein bekanntes Demo-Bild aus dem Verzeichnis
+                const knownDemoFiles = [
+                    '/guest_uploads/AS_as_001.jpg',
+                    '/guest_uploads/Sarah_Müller_001.webp',
+                    '/guest_uploads/Jenny_Schönstes_Brautpaar!!!_001.webp',
+                    '/guest_uploads/Hermann_K._Beste_Hochzeit!!_001.jpg'
+                ];
+                // Prüfe welche Dateien tatsächlich existieren
+                for (const demoFile of knownDemoFiles) {
+                    const demoPath = path.join(__dirname, demoFile);
+                    if (fs.existsSync(demoPath)) {
+                        demoPhotoUrl = demoFile;
+                        break;
+                    }
+                }
+                // Letzter Fallback
+                if (!demoPhotoUrl) {
+                    demoPhotoUrl = knownDemoFiles[0];
+                }
             }
             
             return {
                 id: Date.now().toString() + '-' + Math.random().toString(36).substr(2, 9),
-                url: `/guest_uploads/${finalFilename}`,
+                url: demoPhotoUrl, // Verwende vorhandenes Demo-Bild
                 originalName: file.originalname,
                 uploader: uploader,
                 description: description || '',
@@ -543,20 +550,21 @@ app.post('/api/gallery/upload', guestUpload.array('photos', 10), (req, res) => {
             };
         });
         
-        galleryData.photos.push(...uploadedPhotos);
-        const updatedData = updateGalleryStats(galleryData);
+        // DEMO MODUS: Füge Fotos temporär zur Anzeige hinzu, aber speichere nicht
+        // Die Fotos werden nur im Frontend angezeigt, aber nicht in der Datenbank gespeichert
+        const currentStats = updateGalleryStats(galleryData);
+        const demoStats = {
+            total: currentStats.stats.total + uploadedPhotos.length,
+            contributors: new Set([...galleryData.photos.map(p => p.uploader), uploader]).size
+        };
         
-        if (saveGalleryData(updatedData)) {
-            console.log(`${uploadedPhotos.length} Foto(s) von ${uploader} hochgeladen`);
-            res.json({ 
-                status: 'success', 
-                message: `${uploadedPhotos.length} Foto(s) erfolgreich hochgeladen`,
-                stats: updatedData.stats,
-                photos: uploadedPhotos
-            });
-        } else {
-            throw new Error('Fehler beim Speichern');
-        }
+        console.log(`[DEMO] ${uploadedPhotos.length} Foto(s) von ${uploader} simuliert (nicht gespeichert)`);
+        res.json({ 
+            status: 'success', 
+            message: `${uploadedPhotos.length} Foto(s) erfolgreich hochgeladen`,
+            stats: demoStats,
+            photos: uploadedPhotos
+        });
     } catch (error) {
         console.error('Gallery Upload Fehler:', error);
         // Lösche temporäre Dateien bei Fehler

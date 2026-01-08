@@ -327,8 +327,18 @@ async function handleUpload(e) {
         showNotification(result.message, 'success');
         cancelUpload();
         
-        // Galerie neu laden
-        await loadPhotos();
+        // DEMO MODUS: Füge hochgeladene Fotos temporär zur Anzeige hinzu
+        // (Sie werden nicht in der Datenbank gespeichert und verschwinden nach Reload)
+        if (result.photos && result.photos.length > 0) {
+            allPhotos.push(...result.photos);
+            filteredPhotos = [...allPhotos];
+            updateStats();
+            updateUploaderFilter();
+            renderPhotos();
+        } else {
+            // Fallback: Galerie neu laden
+            await loadPhotos();
+        }
         
     } catch (error) {
         console.error('Upload Error:', error);
