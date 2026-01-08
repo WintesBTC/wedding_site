@@ -1,5 +1,3 @@
 .env
-guest_uploads/
-gallery-data.json
 playlist-data.json
 rsvp-data.json
